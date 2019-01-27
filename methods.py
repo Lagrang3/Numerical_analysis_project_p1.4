@@ -22,10 +22,11 @@ def dist_2(a,b):
 #	n=len(a)
 #	return pow(sum(pow(a-b,2).reshape(n*n)),0.5)
 	
-import numpy as np
-import time
 
 if __name__ == '__main__':
+	import numpy as np
+	import time
+	
 	a = np.random.rand(1000000)
 	b = np.random.rand(1000000)
 	a=a.reshape(1000,1000)
