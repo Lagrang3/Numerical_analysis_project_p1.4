@@ -19,3 +19,6 @@ Distance table for the first *N=100* images using the function `dist_1`.
 
 Distance table for the first *N=100* images using the function `dist_2`.
 <img src="./dist_2.png" alt="Drawing" style="width: 800px;"/>
+
+### Assignment 4.
+See file `init.py`
