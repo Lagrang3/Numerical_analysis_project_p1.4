@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import itertools
 from methods import *
+import time
 
 arc=pylab.load('mnist.npz')
 x_train=arc['arr_0']
@@ -18,7 +19,6 @@ y_test=arc['arr_3']
 #		dist_f(x_train[i],x_train[j]) for i in range(N) for j in range(N) ])
 #	return D.reshape(N,N)
 	
-
 def dist_matrix(N,dist_f):
 	D =np.ndarray((N,N))
 	for i in range(N):
@@ -27,17 +27,17 @@ def dist_matrix(N,dist_f):
 			D[j][i] = D[i][j]
 	return D
 
-import time
 
-start=time.perf_counter()
-d_plain=dist_matrix_np(100,dist_2)
-end=time.perf_counter()
-print(end-start)
+if __name__ == '__main__':
 
-start=time.perf_counter()
-d=dist_matrix(100,dist_2)
-end=time.perf_counter()
-print(end-start)
-
-print(dist_oo(d,d_plain))
-#plt.imshow(x_train[n],cmap='gray_r')
+	plt.figure(1)	
+	plt.imshow(dist_matrix(100,dist_oo),cmap='gray_r')
+	plt.savefig("dist_oo.png")
+	
+	plt.figure(2)	
+	plt.imshow(dist_matrix(100,dist_1),cmap='gray_r')
+	plt.savefig("dist_1.png")
+	
+	plt.figure(3)	
+	plt.imshow(dist_matrix(100,dist_2),cmap='gray_r')
+	plt.savefig("dist_2.png")
