@@ -22,3 +22,8 @@ Distance table for the first *N=100* images using the function `dist_2`.
 
 ### Assignment 4.
 See file `init.py`
+
+### Assignment 5.
+
+Distance table error for three different distance functions.
+<img src="./all_dist_err.png" alt="Drawing" style="width: 800px;"/>

@@ -58,15 +58,15 @@ def dist_error(D):
 
 # Assignment 3
 def plot_dist_matrices():
-	plt.figure(1)	
+	plt.figure()	
 	plt.imshow(dist_matrix(100,dist_oo),cmap='gray_r')
 	plt.savefig("dist_oo.png")
 	
-	plt.figure(2)	
+	plt.figure()	
 	plt.imshow(dist_matrix(100,dist_1),cmap='gray_r')
 	plt.savefig("dist_1.png")
 	
-	plt.figure(3)	
+	plt.figure()	
 	plt.imshow(dist_matrix(100,dist_2),cmap='gray_r')
 	plt.savefig("dist_2.png")
 
@@ -77,10 +77,21 @@ def compute_error_dist_matrix():
 		dist_error(dist_matrix(100,dist_1)),
 		dist_error(dist_matrix(100,dist_2)))
 
-if __name__ == '__main__':
+# Assignment 5.
+def plot_error_dist_matrix():
+	plt.figure()
+	x=[ 100*2**i for i in range(5) ]
+	y_oo = [ dist_error(dist_matrix(n,dist_oo)) for n in x ]
+	y_1 = [ dist_error(dist_matrix(n,dist_1)) for n in x ]
+	y_2 = [ dist_error(dist_matrix(n,dist_2)) for n in x ]
+	plt.plot(x,y_oo,label="dist_oo")
+	plt.plot(x,y_1,label="dist_1")
+	plt.plot(x,y_2,label="dist_2")
+	plt.legend()
+	err_table = np.array( y_oo + y_1 + y_2 ).reshape((3,len(x)))
+	print(err_table.T)
+	plt.savefig("all_dist_err.png")
 
-	start=time.perf_counter()
-	compute_error_dist_matrix()
-	end=time.perf_counter()
+if __name__ == '__main__':
 	
-	print(end-start)
+	plot_error_dist_matrix()
