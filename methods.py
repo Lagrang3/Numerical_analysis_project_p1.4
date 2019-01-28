@@ -24,7 +24,12 @@ def dist_2(a,b):
 #def dist_2_plain(a,b):
 #	n=len(a)
 #	return pow(sum(pow(a-b,2).reshape(n*n)),0.5)
-	
+
+
+def dist_H(a,b)
+	null=
+	na = dist_1(a,null)
+	return 0.
 
 if __name__ == '__main__':
 	import numpy as np

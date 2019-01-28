@@ -92,6 +92,13 @@ def plot_error_dist_matrix():
 	print(err_table.T)
 	plt.savefig("all_dist_err.png")
 
+# Assignment 6.
+def compute_error_dist_matrix_for_distH():
+	x=[ 100*2**i for i in range(3) ]
+	y = [ dist_error(dist_matrix(n,dist_H)) for n in x ]
+	print(y)
+
+
 if __name__ == '__main__':
 	
 	plot_error_dist_matrix()
