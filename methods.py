@@ -38,6 +38,7 @@ def grad(v):
 	n = len(v)
 	vx = np.zeros(v.shape)
 	vy = np.zeros(v.shape)
+	
 	for i in range(n):
 		for j in range(n):
 			if i< n-1 :
@@ -54,19 +55,14 @@ def grad(v):
 
 # OJO
 def dist_H(a,b):
-	fa=a*(1.0/a.sum((0,1)))
-	fb=b*(1.0/b.sum((0,1)))
-	
+	fa=a*(1.0/abs(a).sum((0,1)))
+	fb=b*(1.0/abs(b).sum((0,1)))
 	df = fb-fa
-	
 	fpart = df.flatten()
-	fpart = fpart.dot(fpart)
-	
-	df = grad(df)
-	gpart= sum( [ t.dot(t) for t in df  ]  )
-	
-	return pow( fpart + gpart  ,0.5)
-
+	dx,dy = grad(df)
+	dx=dx.flatten()
+	dy=dy.flatten()
+	return pow( fpart.dot(fpart) + dx.dot(dx) + dy.dot(dy)  ,0.5)
 
 
 if __name__ == '__main__':

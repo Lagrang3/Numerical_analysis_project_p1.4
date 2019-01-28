@@ -43,3 +43,12 @@ See file `init.py`
 
 Distance table error for three different distance functions.
 <img src="./all_dist_err.png" alt="Drawing" style="width: 800px;"/>
+
+### Assignment 6.
+
+The errors of the distance table for *N=100,200,400* are
+`[0.24, 0.19, 0.155]` respectively.
+
+
+Distance table for the first *N=100* images using the function `dist_2`.
+<img src="./dist_H.png" alt="Drawing" style="width: 800px;"/>

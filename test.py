@@ -6,6 +6,34 @@ import unittest
 from init import *
 
 class TestC(unittest.TestCase):
+	
+	def test_H(self):
+		dist=dist_H
+		
+		a=np.array([1.]).reshape(1,1)
+		b=np.array([1.]).reshape(1,1)
+		self.assertEqual(
+			[dist(a,a),dist(b,b),dist(b,a),dist(a,b),dist(2*a,2*b)],
+			[0.,0.,0.,0.,0.])
+		
+		a=np.array([12.]).reshape(1,1)
+		b=np.array([-8.]).reshape(1,1)
+		self.assertEqual(
+			[dist(a,a),dist(b,b),dist(b,a),dist(a,b),dist(2*a,2*b)],
+			[0.,0.,pow(12.,.5),pow(12.,.5),pow(12.,.5)])
+		
+		a=np.array([12.]).reshape(1,1)
+		b=np.array([8.]).reshape(1,1)
+		self.assertEqual(
+			[dist(a,a),dist(b,b),dist(b,a),dist(a,b),dist(2*a,2*b)],
+			[0.,0.,0.,0.,0.])
+	
+		a=np.array([1,1,1,1]).reshape(2,2)
+		b=np.array([1,2,3,4]).reshape(2,2)
+		x=pow(4*0.15**2 + 4*0.05**2 + 2*0.1**2 + 2*0.2**2,.5)
+		self.assertEqual(
+			[dist(a,a),dist(b,b),dist(b,a),dist(a,b),dist(2*a,2*b)],
+			[0.,0.,x,x,x])
 
 	def test_gradient(self):
 		v=np.array([0.]).reshape(1,1)
@@ -205,7 +233,11 @@ if __name__ == "__main__":
 	benchmark_dist(dist_oo,1000)
 	benchmark_dist(dist_1, 1000)
 	benchmark_dist(dist_2, 1000)
+	benchmark_dist(dist_H, 1000)
 	
 	benchmark_dist_matrix(100,dist_oo,x_train)
 	benchmark_dist_matrix(100,dist_1,x_train)
 	benchmark_dist_matrix(100,dist_2,x_train)
+	benchmark_dist_matrix(100,dist_H,x_train)
+	
+	compute_error_dist_matrix_for_distH()
