@@ -5,7 +5,8 @@ author: Myself
 
 ### Assignment 1.
 See file `methods.py`. Here below the performance of
-the distance functions implemented, running on an array size of 1000x1000.
+the distance functions implemented, running on an array size of *NxN*
+with *N=1000*. The complexity is *O(N^2)*.
 
 ```
 dist_oo at 1000: 	0.00952 seconds
@@ -14,7 +15,15 @@ dist_2 at 1000: 	0.00905 seconds
 ```
 
 ### Assignment 2.
-See file `init.py`
+See file `init.py`. Here below the performance of the
+computation of matrix distances for *N* images of size 
+*SxS* with *S=28* and *N=100*. The complexity is *O(N^2 S^2)*.
+
+```
+dist_oo at 100: 0.14429 seconds
+dist_1 at 100: 	0.14468 seconds
+dist_2 at 100: 	0.14166 seconds
+```
 
 ### Assignment 3.
 

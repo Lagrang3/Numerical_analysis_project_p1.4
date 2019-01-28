@@ -34,6 +34,13 @@ def dist_matrix(N,dist_f):
 			D[j][i] = D[i][j]
 	return D
 
+
+def benchmark_dist_matrix(N,dist):
+	start=time.perf_counter()
+	r=dist_matrix(N,dist)
+	end=time.perf_counter()
+	print('%s at %i: \t%.5f seconds' % (dist.__name__,N,end-start) )
+
 def dist_error(D):
 	'''
 	This functions computes the error of using distance
@@ -93,5 +100,8 @@ def plot_error_dist_matrix():
 	plt.savefig("all_dist_err.png")
 
 if __name__ == '__main__':
+
+	benchmark_dist_matrix(100,dist_oo)
+	benchmark_dist_matrix(100,dist_1)
+	benchmark_dist_matrix(100,dist_2)
 	
-	plot_error_dist_matrix()
