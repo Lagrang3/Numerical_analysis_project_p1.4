@@ -20,6 +20,7 @@ def time_this(f):
 		return r
 	return tf
 
+# Assignment 1.
 def dist_oo(a,b):
 	return abs(a-b).max((0,1))
 
@@ -27,6 +28,7 @@ def dist_oo(a,b):
 #	n=len(a)
 #	return max(abs(a-b).reshape(n*n))
 	
+# Assignment 1.
 def dist_1(a,b):
 	return abs(a-b).sum((0,1))
 	
@@ -34,6 +36,7 @@ def dist_1(a,b):
 #	n=len(a)
 #	return sum(abs(a-b).reshape(n*n))
 
+# Assignment 1.
 def dist_2(a,b):
 	t=(a-b).flatten()
 	return pow(t.dot(t),0.5)
