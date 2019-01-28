@@ -24,27 +24,15 @@ def time_this(f):
 def dist_oo(a,b):
 	return abs(a-b).max((0,1))
 
-#def dist_oo_plain(a,b):
-#	n=len(a)
-#	return max(abs(a-b).reshape(n*n))
-	
 # Assignment 1.
 def dist_1(a,b):
 	return abs(a-b).sum((0,1))
 	
-#def dist_1_plain(a,b):
-#	n=len(a)
-#	return sum(abs(a-b).reshape(n*n))
-
 # Assignment 1.
 def dist_2(a,b):
 	t=(a-b).flatten()
 	return pow(t.dot(t),0.5)
 
-#def dist_2_plain(a,b):
-#	n=len(a)
-#	return pow(sum(pow(a-b,2).reshape(n*n)),0.5)
-	
 def benchmark_dist(dist):
 	N=1000
 	a=np.random.rand(N*N).reshape(N,N)
