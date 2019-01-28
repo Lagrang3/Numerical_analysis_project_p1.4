@@ -40,10 +40,12 @@ def grad(v):
 	n = len(v)
 	vx = np.zeros(v.shape)
 	vy = np.zeros(v.shape)
-	for i in range(n-1):
-		for j in range(n-1):
-			vx[i][j] = v[i+1][j]-v[i][j]
-			vy[i][j] = v[i][j+1]-v[i][j]
+	for i in range(n):
+		for j in range(n):
+			if i< n-1 :
+				vx[i][j] = v[i+1][j]-v[i][j]
+			if j< n-1:
+				vy[i][j] = v[i][j+1]-v[i][j]
 	return (vx,vy)			
 
 
