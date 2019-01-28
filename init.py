@@ -94,11 +94,15 @@ def plot_error_dist_matrix():
 
 # Assignment 6.
 def compute_error_dist_matrix_for_distH():
+	plt.figure()	
+	plt.imshow(dist_matrix(100,dist_H),cmap='gray_r')
+	plt.savefig("dist_H.png")
+	
 	x=[ 100*2**i for i in range(3) ]
 	y = [ dist_error(dist_matrix(n,dist_H)) for n in x ]
 	print(y)
 
 
 if __name__ == '__main__':
-	
-	plot_error_dist_matrix()
+
+	compute_error_dist_matrix_for_distH()

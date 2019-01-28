@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+import numpy as np
+
 # Assignment 1.
 def dist_oo(a,b):
 	return abs(a-b).max((0,1))
@@ -25,22 +27,35 @@ def dist_2(a,b):
 #	n=len(a)
 #	return pow(sum(pow(a-b,2).reshape(n*n)),0.5)
 
+# OJO
+def grad(v):
+	n = len(v)
+	vx = np.zeros(v.shape)
+	vy = np.zeros(v.shape)
+	for i in range(n-1):
+		for j in range(n-1):
+			vx[i][j] = v[i+1][j]-v[i][j]
+			vy[i][j] = v[i][j+1]-v[i][j]
+	return (vx,vy)			
 
-def dist_H(a,b)
-	null=
-	na = dist_1(a,null)
-	return 0.
+
+# OJO
+def dist_H(a,b):
+	fa=a*(1.0/a.sum((0,1)))
+	fb=b*(1.0/b.sum((0,1)))
+	
+	df = fb-fa
+	
+	fpart = df.flatten()
+	fpart = fpart.dot(fpart)
+	
+	df = grad(df)
+	gpart= sum( [ t.dot(t) for t in df  ]  )
+	
+	return pow( fpart + gpart  ,0.5)
+
+
 
 if __name__ == '__main__':
-	import numpy as np
-	import time
+
 	
-	a = np.random.rand(1000000)
-	b = np.random.rand(1000000)
-	a=a.reshape(1000,1000)
-	b=b.reshape(1000,1000)
-	
-	start=time.perf_counter()
-	v=dist_2(a,b)	
-	end=time.perf_counter()
-	print(end-start,v)
