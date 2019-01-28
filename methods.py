@@ -34,8 +34,6 @@ def dist_2(a,b):
 	return pow(t.dot(t),0.5)
 
 
-	
-# OJO
 def grad(v):
 	n = len(v)
 	vx = np.zeros(v.shape)
@@ -44,8 +42,13 @@ def grad(v):
 		for j in range(n):
 			if i< n-1 :
 				vx[i][j] = v[i+1][j]-v[i][j]
+			else:
+				vx[i][j] = -v[i][j] # out of the border is 0
+				
 			if j< n-1:
 				vy[i][j] = v[i][j+1]-v[i][j]
+			else:
+				vy[i][j] = -v[i][j] # out of the border is 0
 	return (vx,vy)			
 
 

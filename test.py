@@ -8,13 +8,13 @@ from init import *
 class TestC(unittest.TestCase):
 
 	def test_gradient(self):
-		v=np.array([100.]).reshape(1,1)
+		v=np.array([0.]).reshape(1,1)
 		gx,gy=grad(v)
 		self.assertEqual(  abs(gx[0,0]) + abs(gy[0,0]) , 0.0  )
 
 		v=np.array([1,2,3,5]).reshape(2,2)
-		tx=np.array([2,3,0,0]).reshape(2,2)
-		ty=np.array([1,0,2,0]).reshape(2,2)
+		tx=np.array([2,3,-3,-5]).reshape(2,2)
+		ty=np.array([1,-2,2,-5]).reshape(2,2)
 		gx,gy=grad(v)
 		self.assertEqual( dist_oo(gx,tx) + dist_oo(gy,ty) , 0.)
 
@@ -199,7 +199,6 @@ def benchmark_dist_matrix(N,dist,data):
 	print('dist_matrix for %i images of size %s using %s: %.5f seconds' % (N,str(data[0].shape),dist.__name__,end-start) )
 	
 if __name__ == "__main__":
-	
 	
 	unittest.main(exit=False)
 	
