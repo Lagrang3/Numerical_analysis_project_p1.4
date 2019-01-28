@@ -21,7 +21,7 @@ y_test=arc['arr_3']
 	
 	
 # Assignment 2	
-def dist_matrix(N,dist_f):
+def dist_matrix(N,dist_f,data):
 	'''
 	This function computes the distance matrix 
 	of the first N images in the training list using
@@ -30,14 +30,14 @@ def dist_matrix(N,dist_f):
 	D =np.ndarray((N,N))
 	for i in range(N):
 		for j in range(i,N):
-			D[i][j] = dist_f(x_train[i],x_train[j])
+			D[i][j] = dist_f(data[i],data[j])
 			D[j][i] = D[i][j]
 	return D
 
 
 def benchmark_dist_matrix(N,dist):
 	start=time.perf_counter()
-	r=dist_matrix(N,dist)
+	r=dist_matrix(N,dist,x_train)
 	end=time.perf_counter()
 	print('%s at %i: \t%.5f seconds' % (dist.__name__,N,end-start) )
 
@@ -66,31 +66,31 @@ def dist_error(D):
 # Assignment 3
 def plot_dist_matrices():
 	plt.figure()	
-	plt.imshow(dist_matrix(100,dist_oo),cmap='gray_r')
+	plt.imshow(dist_matrix(100,dist_oo,x_train),cmap='gray_r')
 	plt.savefig("dist_oo.png")
 	
 	plt.figure()	
-	plt.imshow(dist_matrix(100,dist_1),cmap='gray_r')
+	plt.imshow(dist_matrix(100,dist_1,x_train),cmap='gray_r')
 	plt.savefig("dist_1.png")
 	
 	plt.figure()	
-	plt.imshow(dist_matrix(100,dist_2),cmap='gray_r')
+	plt.imshow(dist_matrix(100,dist_2,x_train),cmap='gray_r')
 	plt.savefig("dist_2.png")
 
 # Assignment 4.
 def compute_error_dist_matrix():
 	print(
-		dist_error(dist_matrix(100,dist_oo)),
-		dist_error(dist_matrix(100,dist_1)),
-		dist_error(dist_matrix(100,dist_2)))
+		dist_error(dist_matrix(100,dist_oo,x_train)),
+		dist_error(dist_matrix(100,dist_1,x_train)),
+		dist_error(dist_matrix(100,dist_2,x_train)))
 
 # Assignment 5.
 def plot_error_dist_matrix():
 	plt.figure()
 	x=[ 100*2**i for i in range(5) ]
-	y_oo = [ dist_error(dist_matrix(n,dist_oo)) for n in x ]
-	y_1 = [ dist_error(dist_matrix(n,dist_1)) for n in x ]
-	y_2 = [ dist_error(dist_matrix(n,dist_2)) for n in x ]
+	y_oo = [ dist_error(dist_matrix(n,dist_oo,x_train)) for n in x ]
+	y_1 = [ dist_error(dist_matrix(n,dist_1,x_train)) for n in x ]
+	y_2 = [ dist_error(dist_matrix(n,dist_2,x_train)) for n in x ]
 	plt.plot(x,y_oo,label="dist_oo")
 	plt.plot(x,y_1,label="dist_1")
 	plt.plot(x,y_2,label="dist_2")

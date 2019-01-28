@@ -2,10 +2,19 @@
 
 import numpy as np
 import unittest
-from methods import *
+from init import *
 
 class TestC(unittest.TestCase):
-	
+
+	def test_err_dist_matrix(self):
+		x=[ 100*2**i for i in range(2) ]
+		y = [ [ dist_error(dist_matrix(n,dist,x_train)) 
+					for dist in [dist_oo,dist_1,dist_2] ]
+					for n in x  ]
+		self.assertEqual(y,
+			[[ 0.58,      0.17,      0.17    ],
+			 [ 0.52,      0.145,     0.135   ]])
+
 	def test_d2(self):
 		dist=dist_2
 		
