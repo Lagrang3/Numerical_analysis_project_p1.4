@@ -1,5 +1,25 @@
 #!/usr/bin/env python
 
+import time
+import numpy as np
+
+def args_to_str(*args,**kw):
+	l = []
+	if args:
+		l.append( ", ".join( str(i) for i in args)  )
+	if kw:
+		l.append( ", ".join( "{0}={1}".format(k,v)  for k,v in kw.items()))
+	return ", ".join(l)
+
+def time_this(f):
+	def tf(*args,**kw):
+		start=time.perf_counter()
+		r=f(*args,**kw)
+		end=time.perf_counter()
+		print('%s(%s): %.5fs' % (f.__name__,args_to_str(*args,**kw),end-start))
+		return r
+	return tf
+
 def dist_oo(a,b):
 	return abs(a-b).max((0,1))
 
@@ -22,16 +42,17 @@ def dist_2(a,b):
 #	n=len(a)
 #	return pow(sum(pow(a-b,2).reshape(n*n)),0.5)
 	
-import numpy as np
-import time
+def benchmark_dist(dist):
+	N=1000
+	a=np.random.rand(N*N).reshape(N,N)
+	b=np.random.rand(N*N).reshape(N,N)
+	start=time.perf_counter()
+	r=dist(a,b)
+	end=time.perf_counter()
+	print('%s at %i: \t%.5f seconds' % (dist.__name__,N,end-start) )
 
 if __name__ == '__main__':
-	a = np.random.rand(1000000)
-	b = np.random.rand(1000000)
-	a=a.reshape(1000,1000)
-	b=b.reshape(1000,1000)
-	
-	start=time.perf_counter()
-	v=dist_2(a,b)	
-	end=time.perf_counter()
-	print(end-start,v)
+
+	benchmark_dist(dist_oo)
+	benchmark_dist(dist_1)
+	benchmark_dist(dist_2)
