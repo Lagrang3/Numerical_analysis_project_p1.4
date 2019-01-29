@@ -65,7 +65,7 @@ def dist_H_old(a,b):
 	dy=dy.flatten()
 	return pow( fpart.dot(fpart) + dx.dot(dx) + dy.dot(dy)  ,0.5)
 
-dso=ctypes.CDLL("./libdist_H.so")
+dso=ctypes.CDLL("./libdist.so")
 dso.dist_H.argtypes=[
 	ctypes.POINTER(ctypes.c_double),
 	ctypes.POINTER(ctypes.c_double),

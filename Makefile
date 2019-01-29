@@ -1,10 +1,10 @@
 CC=gcc
-default: libdist_H.so
+default: libdist.so
 
 %.so: %.c
 	$(CC) $< -o $@ -shared -fpic 
 	
-check: libdist_H.so
+check: libdist.so
 	./test.py
 
 clean:
