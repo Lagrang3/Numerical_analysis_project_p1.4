@@ -100,7 +100,7 @@ def compute_error_dist_matrix_for_distH():
 	plt.imshow(dist_matrix(100,dist_H,x_train),cmap='gray_r')
 	plt.savefig("dist_H.png")
 	
-	x=[ 100*2**i for i in range(3) ]
+	x=[ 100*2**i for i in range(5) ]
 	y = [ dist_error(dist_matrix(n,dist_H,x_train)) for n in x ]
 	print(y)
 

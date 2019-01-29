@@ -31,20 +31,22 @@ class TestC(unittest.TestCase):
 		a=np.array([1,1,1,1]).reshape(2,2)
 		b=np.array([1,2,3,4]).reshape(2,2)
 		x=pow(4*0.15**2 + 4*0.05**2 + 2*0.1**2 + 2*0.2**2,.5)
+		y=dist(a,b)
+		self.assertAlmostEqual(x,y,places=12)
 		self.assertEqual(
 			[dist(a,a),dist(b,b),dist(b,a),dist(a,b),dist(2*a,2*b)],
-			[0.,0.,x,x,x])
+			[0.,0.,y,y,y])
 
-	def test_gradient(self):
-		v=np.array([0.]).reshape(1,1)
-		gx,gy=grad(v)
-		self.assertEqual(  abs(gx[0,0]) + abs(gy[0,0]) , 0.0  )
-
-		v=np.array([1,2,3,5]).reshape(2,2)
-		tx=np.array([2,3,-3,-5]).reshape(2,2)
-		ty=np.array([1,-2,2,-5]).reshape(2,2)
-		gx,gy=grad(v)
-		self.assertEqual( dist_oo(gx,tx) + dist_oo(gy,ty) , 0.)
+#	def test_gradient(self):
+#		v=np.array([0.]).reshape(1,1)
+#		gx,gy=grad(v)
+#		self.assertEqual(  abs(gx[0,0]) + abs(gy[0,0]) , 0.0  )
+#
+#		v=np.array([1,2,3,5]).reshape(2,2)
+#		tx=np.array([2,3,-3,-5]).reshape(2,2)
+#		ty=np.array([1,-2,2,-5]).reshape(2,2)
+#		gx,gy=grad(v)
+#		self.assertEqual( dist_oo(gx,tx) + dist_oo(gy,ty) , 0.)
 
 		
 		
@@ -52,11 +54,11 @@ class TestC(unittest.TestCase):
 	def test_err_dist_matrix(self):
 		x=[ 100*2**i for i in range(2) ]
 		y = [ [ dist_error(dist_matrix(n,dist,x_train)) 
-					for dist in [dist_oo,dist_1,dist_2] ]
+					for dist in [dist_oo,dist_1,dist_2,dist_H] ]
 					for n in x  ]
 		self.assertEqual(y,
-			[[ 0.58,      0.17,      0.17    ],
-			 [ 0.52,      0.145,     0.135   ]])
+			[[ 0.58,      0.17,      0.17 ,0.24   ],
+			 [ 0.52,      0.145,     0.135 ,0.19   ]])
 
 	def test_d2(self):
 		dist=dist_2
@@ -240,4 +242,3 @@ if __name__ == "__main__":
 	benchmark_dist_matrix(100,dist_2,x_train)
 	benchmark_dist_matrix(100,dist_H,x_train)
 	
-	compute_error_dist_matrix_for_distH()
