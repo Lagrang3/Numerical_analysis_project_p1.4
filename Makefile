@@ -7,7 +7,10 @@ default: libdist.so
 check: libdist.so
 	./test.py
 
+run: libdist.so
+	./init.py
+
 clean:
-	rm *.so
+	rm *.so 
 	
-.PHONY: clean default check
+.PHONY: clean default check run

@@ -104,6 +104,20 @@ def compute_error_dist_matrix_for_distH():
 	y = [ dist_error(dist_matrix(n,dist_H,x_train)) for n in x ]
 	print(y)
 
+# Assignment 7.
+def compute_error_dist_matrix_for_distMA():
+	plt.figure()
+	dm = dist_matrix(100,dist_MA,x_train)
+	plt.imshow(dm,cmap='gray_r')
+	plt.savefig("dist_MA.png")
+	
+	x=[ 100*2**i for i in range(5) ]
+	y = [ dist_error( dist_matrix(n,dist_MA,x_train)  ) for n in x ]
+	print(y)
 
 if __name__ == '__main__':
-	pass
+	
+	#print( dist_MA(x_train[0],x_train[1])  )
+	#print( dist_2(x_train[0],x_train[1])  )
+	
+	compute_error_dist_matrix_for_distMA()

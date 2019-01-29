@@ -236,9 +236,11 @@ if __name__ == "__main__":
 	benchmark_dist(dist_1, 1000)
 	benchmark_dist(dist_2, 1000)
 	benchmark_dist(dist_H, 1000)
+	benchmark_dist(dist_MA,1000)
 	
 	benchmark_dist_matrix(100,dist_oo,x_train)
 	benchmark_dist_matrix(100,dist_1,x_train)
 	benchmark_dist_matrix(100,dist_2,x_train)
 	benchmark_dist_matrix(100,dist_H,x_train)
-	
+	benchmark_dist_matrix(100,dist_MA,x_train)
+

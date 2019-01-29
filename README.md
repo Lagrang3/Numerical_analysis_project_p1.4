@@ -51,6 +51,14 @@ See file `init.py`
 Distance table error for three different distance functions.
 <img src="./all_dist_err.png" alt="Drawing" style="width: 800px;"/>
 
+```
+[[ 0.58      0.17      0.17    ]
+ [ 0.52      0.145     0.135   ]
+ [ 0.4425    0.15      0.135   ]
+ [ 0.4       0.145     0.12875 ]
+ [ 0.369375  0.1025    0.09375 ]]
+```
+
 ### Assignment 6.
 
 Here below the performance of
@@ -69,5 +77,28 @@ dist_matrix for 100 images of size (28, 28) using dist_H: 0.46454 seconds
 The errors of the distance table for *N=100,200,400,800,1600* are
 `[0.24, 0.19, 0.155, 0.14625, 0.1175]` respectively.
 
-Distance table for the first *N=100* images using the function `dist_2`.
+Distance table for the first *N=100* images using the function `dist_H`.
 <img src="./dist_H.png" alt="Drawing" style="width: 800px;"/>
+
+### Assignment 7.
+
+Here below the performance of
+the distance function `dist_MA`, running on an array size of *NxN*
+with *N=1000*. The complexity is *O(N^2 T)*, where *T* is the number
+of steps used to solve the Poisson Equation using Jacobi's method.
+We fix *T=100*.
+```
+dist_MA for images of size (1000, 1000): 1.98423 seconds
+```
+Here below the performance of the
+computation of matrix distances for *N* images of size 
+*SxS* with *S=28* and *N=100*. The complexity is *O(N^2 T S^2)*.
+```
+dist_matrix for 100 images of size (28, 28) using dist_MA: 7.75710 seconds
+```
+
+The errors of the distance table for *N=100,200,400,800,1600* are
+`[0.25, 0.2, 0.1425, 0.12875, 0.1225]` respectively.
+
+Distance table for the first *N=100* images using the function `dist_MA`.
+<img src="./dist_MA.png" alt="Drawing" style="width: 800px;"/>
