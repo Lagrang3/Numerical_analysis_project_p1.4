@@ -119,5 +119,5 @@ if __name__ == '__main__':
 	
 	#print( dist_MA(x_train[0],x_train[1])  )
 	#print( dist_2(x_train[0],x_train[1])  )
-	
+
 	compute_error_dist_matrix_for_distMA()

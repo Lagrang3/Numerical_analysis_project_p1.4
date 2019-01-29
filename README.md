@@ -98,7 +98,7 @@ dist_matrix for 100 images of size (28, 28) using dist_MA: 7.75710 seconds
 ```
 
 The errors of the distance table for *N=100,200,400,800,1600* are
-`[0.25, 0.2, 0.1425, 0.12875, 0.1225]` respectively.
+`[0.14, 0.105, 0.1025, 0.0975, 0.075625]` respectively.
 
 Distance table for the first *N=100* images using the function `dist_MA`.
 <img src="./dist_MA.png" alt="Drawing" style="width: 800px;"/>

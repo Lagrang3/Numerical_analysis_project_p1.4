@@ -72,12 +72,11 @@ double dist_MA(const double* A,const double* B,const size_t N){
 	for(size_t i=1;i<=N;++i)
 		for(size_t j=1;j<=N;++j){
 			double vx = phi[(i+1)*Npad+j]-phi[(i-1)*Npad+j],
-				vy = phi[i*Npad+j+1]-phi[i*Npad+j-1],
-				s = At[i*Npad+j]+Bt[i*Npad+j];
-			I += s*(vx*vx+vy*vy);
+				vy = phi[i*Npad+j+1]-phi[i*Npad+j-1];
+//				s = A[(i-1)*N+(j-1)]-B[(i-1)*N+(j-1)];
+			I += ( vx*vx+vy*vy);
 		}
 		
-	I*=0.25;
 	
 	free(At);	
 	free(Bt);	
