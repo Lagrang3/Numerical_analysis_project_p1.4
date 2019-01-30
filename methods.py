@@ -35,25 +35,6 @@ def dist_2(a,b):
 	return pow(t.dot(t),0.5)
 
 
-def grad(v):
-	n = len(v)
-	vx = np.zeros(v.shape)
-	vy = np.zeros(v.shape)
-	
-	for i in range(n):
-		for j in range(n):
-			if i< n-1 :
-				vx[i][j] = v[i+1][j]-v[i][j]
-			else:
-				vx[i][j] = -v[i][j] # out of the border is 0
-				
-			if j< n-1:
-				vy[i][j] = v[i][j+1]-v[i][j]
-			else:
-				vy[i][j] = -v[i][j] # out of the border is 0
-	return (vx,vy)			
-
-
 # OJO
 def dist_H_old(a,b):
 	fa=a*(1.0/abs(a).sum((0,1)))

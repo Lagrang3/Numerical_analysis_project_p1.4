@@ -18,21 +18,21 @@ double dist_H(const double* A,const double *B,const size_t N){
 	}
 
 
-	for(size_t i=0;i<N;++i)
-		for(size_t j=0;j<N;++j){
-			double nextAx=0.,nextAy=0.,nextBx=0.,nextBy=0.;
-			if(i<(N-1)){
-				nextAx = A[(i+1)*N+j];
-				nextBx = B[(i+1)*N+j];
-			}
-			if(j<(N-1)){
-				nextAy = A[i*N+j+1];
-				nextBy = B[i*N+j+1];
-			}
-			double vx = (nextAx-A[i*N+j])*inA - (nextBx-B[i*N+j])*inB;
-			double vy = (nextAy-A[i*N+j])*inA - (nextBy-B[i*N+j])*inB;
+	for(size_t i=1;i<N;++i)
+		for(size_t j=1;j<N;++j){
+			double vx,vy;
+			vx = (A[i*N+j]-A[(i-1)*N+j])*inA 
+				- (B[i*N+j]-B[(i-1)*N+j])*inB;
+			vy = (A[i*N+j]-A[i*N+(j-1)])*inA 
+				- (B[i*N+j]-B[i*N+(j-1)])*inB;
 			I += vx*vx + vy*vy;
 		}
+	for(size_t i=1;i<N;++i){
+		double vx,vy;
+		vx=(A[i*N]-A[(i-1)*N])*inA-(B[i*N]-B[(i-1)*N])*inB;
+		vy=(A[i]-A[i-1])*inA-(B[i]-B[i-1])*inB;
+		I+= vx*vx+vy*vy;
+	}
 	
 	return sqrt(I);
 }
