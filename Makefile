@@ -1,7 +1,10 @@
 CC=gcc
-default: libdist.so
+default: libdist.so pydist.cpython-37m-x86_64-linux-gnu.so 
 
-%.so: %.c
+pydist.cpython-37m-x86_64-linux-gnu.so: pydist.pyx
+	python setup.py build_ext -if
+
+libdist.so: libdist.c
 	$(CC) $< -o $@ -shared -fpic 
 	
 check: libdist.so
@@ -11,6 +14,6 @@ run: libdist.so
 	./init.py
 
 clean:
-	rm *.so 
+	rm -r build *.so pydist.c
 	
 .PHONY: clean default check run

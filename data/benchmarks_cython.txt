@@ -1,0 +1,11 @@
+./test.py
+dist_oo for images of size (1000, 1000): 0.01235 seconds
+dist_1 for images of size (1000, 1000): 0.00923 seconds
+dist_2 for images of size (1000, 1000): 0.00895 seconds
+dist_H for images of size (1000, 1000): 0.03866 seconds
+dist_MA for images of size (1000, 1000): 1.13920 seconds
+dist_matrix for 100 images of size (28, 28) using dist_oo: 0.14630 seconds
+dist_matrix for 100 images of size (28, 28) using dist_1: 0.14440 seconds
+dist_matrix for 100 images of size (28, 28) using dist_2: 0.13851 seconds
+dist_matrix for 100 images of size (28, 28) using dist_H: 0.87052 seconds
+dist_matrix for 100 images of size (28, 28) using dist_MA: 4.53106 seconds
