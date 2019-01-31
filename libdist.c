@@ -1,8 +1,7 @@
 #include <stdlib.h>
 #include <math.h>
-#include <stdio.h>
 
-double dist_MA(const double* A,const double* B,const size_t N){
+double cdist_MA(const double* A,const double* B,const size_t N){
 	const size_t N2=N*N,T=56,Npad=N+2;
 	double nA=0,nB=0;
 	double *phi = (double*)malloc(Npad*Npad*sizeof(double)),
@@ -24,7 +23,7 @@ double dist_MA(const double* A,const double* B,const size_t N){
 			phi[i*Npad+j] = (At[i*Npad+j]-Bt[i*Npad+j])*0.25;
 		}
 	
-	for(int t=0;t<T;++t)
+	for(size_t t=0;t<T;++t)
 		for(size_t i=1;i<=N;++i)
 			for(size_t j=1;j<=N;++j){
 				phi[i*Npad+j] = 0.25*(

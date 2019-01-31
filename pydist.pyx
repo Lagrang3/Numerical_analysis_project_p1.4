@@ -1,4 +1,8 @@
+cdef extern from "libdist.c":
+	double cdist_MA(const double*,const double*,const size_t)
+
 import numpy as np
+cimport numpy as np
 
 # Assignment 1.
 def dist_oo(a,b):
@@ -22,3 +26,10 @@ def dist_H(a,b):
 	dx=np.diff(df,axis=0).flatten()
 	dy=np.diff(df,axis=1).flatten()
 	return pow( fpart.dot(fpart) + dx.dot(dx) + dy.dot(dy)  ,0.5)
+	
+# Assignment 7.
+def dist_MA(
+	np.ndarray[np.double_t,ndim=2] a,
+	np.ndarray[np.double_t,ndim=2] b):
+	
+	return cdist_MA(<double*> a.data, <double*> b.data, len(a))

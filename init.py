@@ -9,9 +9,9 @@ from methods import *
 import time
 
 arc=pylab.load('mnist.npz')
-x_train=arc['arr_0']
+x_train=arc['arr_0'].astype(np.double)
 y_train=arc['arr_1']
-x_test=arc['arr_2']
+x_test=arc['arr_2'].astype(np.double)
 y_test=arc['arr_3']
 
 def plot_dist_matrix(ldist):
