@@ -46,13 +46,6 @@ def dist_H(a,b):
 
 dso=ctypes.CDLL("./libdist.so")
 
-dso.dist_H.argtypes=[
-	ctypes.POINTER(ctypes.c_double),
-	ctypes.POINTER(ctypes.c_double),
-	ctypes.c_size_t]
-	
-dso.dist_H.restype = ctypes.c_double
-
 dso.dist_MA.argtypes=[
 	ctypes.POINTER(ctypes.c_double),
 	ctypes.POINTER(ctypes.c_double),
@@ -62,15 +55,6 @@ dso.dist_MA.restype = ctypes.c_double
 
 c_double_p = ctypes.POINTER(ctypes.c_double)
 
-
-def dist_H_C(a,b):
-	n=len(a)
-	ta=a.flatten().astype(np.float64)
-	tta=ta.ctypes.data_as(c_double_p)
-
-	tb=b.flatten().astype(np.float64)
-	ttb=tb.ctypes.data_as(c_double_p)
-	return dso.dist_H(tta,ttb,n)
 
 def dist_MA(a,b):
 	n=len(a)

@@ -2,41 +2,6 @@
 #include <math.h>
 #include <stdio.h>
 
-double dist_H(const double* A,const double *B,const size_t N){
-	const size_t N2=N*N;
-	double nA=0,nB=0;
-
-	for(size_t i=0;i<N2;++i){
-		nA += fabs(A[i]),
-		nB += fabs(B[i]);
-	}
-	double inA = 1./nA, inB = 1./nB, I=0.;
-	
-	for(size_t i=0;i<N2;++i){
-		double v = A[i]*inA - B[i]*inB;
-		I += v*v;
-	}
-
-
-	for(size_t i=1;i<N;++i)
-		for(size_t j=1;j<N;++j){
-			double vx,vy;
-			vx = (A[i*N+j]-A[(i-1)*N+j])*inA 
-				- (B[i*N+j]-B[(i-1)*N+j])*inB;
-			vy = (A[i*N+j]-A[i*N+(j-1)])*inA 
-				- (B[i*N+j]-B[i*N+(j-1)])*inB;
-			I += vx*vx + vy*vy;
-		}
-	for(size_t i=1;i<N;++i){
-		double vx,vy;
-		vx=(A[i*N]-A[(i-1)*N])*inA-(B[i*N]-B[(i-1)*N])*inB;
-		vy=(A[i]-A[i-1])*inA-(B[i]-B[i-1])*inB;
-		I+= vx*vx+vy*vy;
-	}
-	
-	return sqrt(I);
-}
-
 double dist_MA(const double* A,const double* B,const size_t N){
 	const size_t N2=N*N,T=56,Npad=N+2;
 	double nA=0,nB=0;

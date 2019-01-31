@@ -31,7 +31,7 @@ def compute_error_dist_matrix(ldist):
 	output: a list of values of the error of the distance matrix 
 	for N = 100,200,400,800,1600.
 	'''
-	x=[ 100*2**i for i in range(2) ]
+	x=[ 100*2**i for i in range(5) ]
 	ly = []
 	for dist_f in ldist:
 		start=time.perf_counter()
