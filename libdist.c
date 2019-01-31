@@ -38,7 +38,7 @@ double dist_H(const double* A,const double *B,const size_t N){
 }
 
 double dist_MA(const double* A,const double* B,const size_t N){
-	const size_t N2=N*N,T= 100,Npad=N+2;
+	const size_t N2=N*N,T=56,Npad=N+2;
 	double nA=0,nB=0;
 	double *phi = (double*)malloc(Npad*Npad*sizeof(double)),
 			*At = (double*)malloc(Npad*Npad*sizeof(double)),

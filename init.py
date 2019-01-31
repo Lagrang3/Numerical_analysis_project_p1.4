@@ -31,7 +31,7 @@ def compute_error_dist_matrix(ldist):
 	output: a list of values of the error of the distance matrix 
 	for N = 100,200,400,800,1600.
 	'''
-	x=[ 100*2**i for i in range(5) ]
+	x=[ 100*2**i for i in range(2) ]
 	ly = []
 	for dist_f in ldist:
 		start=time.perf_counter()
@@ -53,11 +53,12 @@ def plot_error_dist_matrix(ldist,x,ly):
 	'''
 	plt.figure()
 	y=[]
-	for i,d in enumerate(ldist):
-		plt.plot(x,
-			ly[i],
+	for d,yd in zip(ldist,ly):
+		plt.plot(
+			x,
+			yd,
 			label=d.__name__)
-		y = y + ly
+		y = y + yd
 	plt.legend()
 	err_table = np.array( y ).reshape((len(ldist),len(x)))
 	print(err_table.T)
@@ -71,7 +72,7 @@ if __name__ == '__main__':
 
 	plot_dist_matrix(
 		[dist_oo,dist_1,dist_2,dist_H,dist_MA])
-	x,ly=compute_and_plot_error_dist_matrix(
+	x,ly=compute_error_dist_matrix(
 		[dist_oo,dist_1,dist_2,dist_H,dist_MA])
 	plot_error_dist_matrix(
 		[dist_oo,dist_1,dist_2,dist_H,dist_MA],x,ly)

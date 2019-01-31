@@ -22,7 +22,7 @@ class TestC(unittest.TestCase):
 
 	def test_err_dist_matrix(self):
 		x=[ 100*2**i for i in range(2) ]
-		y = [ [ dist_error(dist_matrix(n,dist,x_train)) 
+		y = [ [ dist_error(dist_matrix(n,dist,x_train),y_train) 
 					for dist in [dist_oo,dist_1,dist_2,dist_H] ]
 					for n in x  ]
 		self.assertEqual(y,
