@@ -33,3 +33,9 @@ def dist_MA(
 	np.ndarray[np.double_t,ndim=2] b):
 	
 	return cdist_MA(<double*> a.data, <double*> b.data, len(a))
+
+def dist_MA_sklearn(
+	np.ndarray[np.double_t,ndim=1] a,
+	np.ndarray[np.double_t,ndim=1] b):
+	
+	return cdist_MA(<double*> a.data, <double*> b.data, 28)
