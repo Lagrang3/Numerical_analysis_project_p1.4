@@ -14,110 +14,55 @@ y_train=arc['arr_1']
 x_test=arc['arr_2']
 y_test=arc['arr_3']
 
-#def dist_matrix_np(N,dist_f):
-#	D =np.array([
-#		dist_f(x_train[i],x_train[j]) for i in range(N) for j in range(N) ])
-#	return D.reshape(N,N)
-	
-	
-# Assignment 2	
-def dist_matrix(N,dist_f,data):
+
+def plot_error_dist_matrix(ldist):
 	'''
-	This function computes the distance matrix 
-	of the first N images in the training list using
-	the provided distance function dist_f.
+	input: a list of distance functions.
+	output: a plot 'all_dist_err.png' with comparison of
+	the distance matrices for N=100.
 	'''
-	D =np.ndarray((N,N))
-	for i in range(N):
-		for j in range(i,N):
-			D[i][j] = dist_f(data[i],data[j])
-			D[j][i] = D[i][j]
-	return D
-
-
-
-def dist_error(D):
-	'''
-	This functions computes the error of using distance
-	function which produces the distance matrix D.
-	'''
-	oo=1e+100
-	
-	N = len(D)
-	for i in range(N):
-		D[i,i]=oo
-		
-	err=0.
-	for i,row in enumerate(D):
-		j=row.argmin()
-		if y_train[i] != y_train[j]:
-			err += 1.
-	
-	for i in range(N):
-		D[i,i]=0.
-		
-	return err/N
-
-# Assignment 3
-def plot_dist_matrices():
-	plt.figure()	
-	plt.imshow(dist_matrix(100,dist_oo,x_train),cmap='gray_r')
-	plt.savefig("dist_oo.png")
-	
-	plt.figure()	
-	plt.imshow(dist_matrix(100,dist_1,x_train),cmap='gray_r')
-	plt.savefig("dist_1.png")
-	
-	plt.figure()	
-	plt.imshow(dist_matrix(100,dist_2,x_train),cmap='gray_r')
-	plt.savefig("dist_2.png")
-
-# Assignment 4.
-def compute_error_dist_matrix():
-	print(
-		dist_error(dist_matrix(100,dist_oo,x_train)),
-		dist_error(dist_matrix(100,dist_1,x_train)),
-		dist_error(dist_matrix(100,dist_2,x_train)))
-
-# Assignment 5.
-def plot_error_dist_matrix():
 	plt.figure()
 	x=[ 100*2**i for i in range(5) ]
-	y_oo = [ dist_error(dist_matrix(n,dist_oo,x_train)) for n in x ]
-	y_1 = [ dist_error(dist_matrix(n,dist_1,x_train)) for n in x ]
-	y_2 = [ dist_error(dist_matrix(n,dist_2,x_train)) for n in x ]
-	plt.plot(x,y_oo,label="dist_oo")
-	plt.plot(x,y_1,label="dist_1")
-	plt.plot(x,y_2,label="dist_2")
+	y=[]
+	for d in ldist:
+		yd = [ dist_error(dist_matrix(n,d,x_train),y_train) for n in x  ]
+		plt.plot(x,
+			yd,
+			label=d.__name__)
+		y = y + yd
 	plt.legend()
-	err_table = np.array( y_oo + y_1 + y_2 ).reshape((3,len(x)))
+	err_table = np.array( y ).reshape((len(ldist),len(x)))
 	print(err_table.T)
 	plt.savefig("all_dist_err.png")
 
-# Assignment 6.
-def compute_error_dist_matrix_for_distH():
-	plt.figure()	
-	plt.imshow(dist_matrix(100,dist_H,x_train),cmap='gray_r')
-	plt.savefig("dist_H.png")
-	
-	x=[ 100*2**i for i in range(5) ]
-	y = [ dist_error(dist_matrix(n,dist_H,x_train)) for n in x ]
-	print(y)
+def plot_dist_matrix(ldist):
+	'''
+	input: a list of distance functions.
+	output: multiple plots of distance matrices for N=100.
+	'''
+	for dist_f in ldist:
+		plt.figure()
+		dm = dist_matrix(100,dist_f,x_train)
+		plt.imshow(dm,cmap='gray_r')
+		plt.savefig(dist_f.__name__+".png")
 
-# Assignment 7.
-def compute_error_dist_matrix_for_distMA():
-	plt.figure()
-	dm = dist_matrix(100,dist_MA,x_train)
-	plt.imshow(dm,cmap='gray_r')
-	plt.savefig("dist_MA.png")
-	
-	x=[ 100*2**i for i in range(5) ]
-	y = [ dist_error( dist_matrix(n,dist_MA,x_train)  ) for n in x ]
-	print(y)
+def compute_and_plot_error_dist_matrix(ldist):
+	'''
+	input: a list of distance functions.
+	output: a list of values of the error of the distance matrix 
+	for N = 100,200,400,800,1600.
+	'''
+	for dist_f in ldist:
+		start=time.perf_counter()
+		x=[ 100*2**i for i in range(5) ]
+		y = [ dist_error(dist_matrix(n,dist_f,x_train),y_train) for n in x ]
+		end=time.perf_counter()
+		print(dist_f.__name__,y,"( %.2f  seconds)" % (end-start))
+
+
 
 if __name__ == '__main__':
-	
-	#print( dist_MA(x_train[0],x_train[1])  )
-	#print( dist_2(x_train[0],x_train[1])  )
 
-	compute_error_dist_matrix_for_distMA()
+	plot_error_dist_matrix([dist_oo,dist_1,dist_2,dist_H,dist_MA])
+	plot_dist_matrix([dist_oo,dist_1,dist_2,dist_H,dist_MA])
+	compute_and_plot_error_dist_matrix([dist_oo,dist_1,dist_2,dist_H,dist_MA])
