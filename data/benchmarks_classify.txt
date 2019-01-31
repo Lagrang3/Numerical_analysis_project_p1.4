@@ -2,3 +2,9 @@ using dist_MA
 classify(115): 30.90472s
 classify_brute_force(115): 20.46515s
 
+using dist_2
+classify(115): 0.63753s
+classify_brute_force(115): 0.86368s
+
+using EuclideanDistance builtin class
+classify(115): 0.09537s
