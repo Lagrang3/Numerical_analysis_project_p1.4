@@ -23,28 +23,6 @@ def time_this(f):
 	return tf
 
 
-#dso=ctypes.CDLL("./libdist.so")
-#
-#dso.dist_MA.argtypes=[
-#	ctypes.POINTER(ctypes.c_double),
-#	ctypes.POINTER(ctypes.c_double),
-#	ctypes.c_size_t]
-#	
-#dso.dist_MA.restype = ctypes.c_double
-#
-#c_double_p = ctypes.POINTER(ctypes.c_double)
-#
-#
-#def dist_MA(a,b):
-#	n=len(a)
-#	ta=a.flatten().astype(np.float64)
-#	tta=ta.ctypes.data_as(c_double_p)
-#
-#	tb=b.flatten().astype(np.float64)
-#	ttb=tb.ctypes.data_as(c_double_p)
-#	
-#	return dso.dist_MA(tta,ttb,n)
-
 # Assignment 2	
 def dist_matrix(N,dist_f,x_data):
 	'''

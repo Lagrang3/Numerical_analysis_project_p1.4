@@ -15,5 +15,16 @@ run: pydist.cpython-37m-x86_64-linux-gnu.so
 
 clean:
 	rm -r build *.so pydist.c
+
+
+
+plot: data/eff.txt
+	./plot.py
 	
-.PHONY: clean default check run
+	
+
+
+data/eff.txt: classify.py
+	./classify.py >> data/eff.txt 
+
+.PHONY: clean default check run plot
