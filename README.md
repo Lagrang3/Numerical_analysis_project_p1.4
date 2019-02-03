@@ -102,3 +102,9 @@ The errors of the distance table for *N=100,200,400,800,1600* are
 
 Distance table for the first *N=100* images using the function `dist_MA`.
 <img src="./dist_MA.png" alt="Drawing" style="width: 800px;"/>
+
+### Assignment 8.
+
+<img src="./plot_1.png" alt="Drawing" style="width: 800px;"/>
+<img src="./plot_3.png" alt="Drawing" style="width: 800px;"/>
+<img src="./plot_5.png" alt="Drawing" style="width: 800px;"/>

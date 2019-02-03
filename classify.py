@@ -56,8 +56,8 @@ if __name__ == "__main__":
 		
 		X=x_train[:N]
 		
-		#tree=skn.BallTree(X,metric=skn.dist_metrics.ChebyshevDistance()) # L_oo
-		tree=skn.BallTree(X,metric=skn.dist_metrics.ManhattanDistance()) # L_1
+		tree=skn.BallTree(X,metric=skn.dist_metrics.ChebyshevDistance()) # L_oo
+		#tree=skn.BallTree(X,metric=skn.dist_metrics.ManhattanDistance()) # L_1
 		#tree=skn.BallTree(X,metric=skn.dist_metrics.EuclideanDistance()) # L_2
 		#tree=skn.BallTree(X,metric=skn.dist_metrics.PyFuncDistance(dist_MA_sklearn)) #
 
@@ -65,7 +65,7 @@ if __name__ == "__main__":
 			start=time.perf_counter()
 			err=error_classification(tree,k,10000)
 			end=time.perf_counter()
-			print("L1",N,k,err)
+			print("Loo",N,k,err)
 			#print("k: ",k,
 			#	"error:", "%.2f %%" % (err*100),
 			#	"time:", "%.2f sec" % (end-start) )
