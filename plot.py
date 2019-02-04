@@ -13,7 +13,7 @@ def plot_k(kthis):
 		name,N,k,err=l.split()
 		N = int(N)
 		k = int(k)
-		err = float(err)
+		err = float(err)*100
 		
 		if k != kthis:
 			continue
@@ -32,9 +32,9 @@ def plot_k(kthis):
 		plt.plot(x[name],y[name],label=name)
 	
 	plt.legend()
-	plt.xlabel("N")
-	plt.ylabel("eff")
-	plt.title(f"Efficiency for {kthis}-NN")
+	plt.xlabel("N (train images)")
+	plt.ylabel("% of error")
+	plt.title(f"Efficiency for {kthis}-Nearest Neighbors")
 	plt.savefig(f"plot_{kthis}.png")
 	f.close()
 

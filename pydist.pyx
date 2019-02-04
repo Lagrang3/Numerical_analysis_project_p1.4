@@ -39,3 +39,14 @@ def dist_MA_sklearn(
 	np.ndarray[np.double_t,ndim=1] b):
 	
 	return cdist_MA(<double*> a.data, <double*> b.data, 28)
+	
+	
+def solve_poisson(
+	np.ndarray[np.double_t,ndim=2] rho):
+	'''
+	solver of the Poisson equation
+	'''
+	cdef: np.ndarray[np.double_t,ndim=2] 
+		phi=np.zeros(rho.shape)
+	csolve_poisson(<double*> rho.data,<double*> phi.data,28)
+	return phi

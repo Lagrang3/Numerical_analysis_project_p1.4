@@ -4,6 +4,7 @@ import sys
 import numpy as np
 import unittest
 from init import *
+from classify import *
 
 class TestC(unittest.TestCase):
 	
@@ -18,7 +19,27 @@ class TestC(unittest.TestCase):
 		self.assertEqual(
 			[dist(a,a),dist(b,b),dist(b,a),dist(a,b),dist(2*a,2*b)],
 			[0.,0.,y,y,y])
-
+		
+		a=x_train[0]
+		b=x_train[1]
+		x=0.11899615703519785
+		y=dist(a,b)
+		self.assertAlmostEqual(x,y,places=12)
+		self.assertEqual(
+			[dist(a,a),dist(b,b),dist(b,a),dist(a,b)],
+			[0.,0.,y,y])
+		
+		dist=dist_H_sklearn
+		a=x_train[0].reshape(28*28)
+		b=x_train[1].reshape(28*28)
+		x=0.11899615703519785
+		y=dist(a,b)
+		self.assertAlmostEqual(x,y,places=12)
+		self.assertEqual(
+			[dist(a,a),dist(b,b),dist(b,a),dist(a,b)],
+			[0.,0.,y,y])
+			
+		
 
 	def test_err_dist_matrix(self):
 		x=[ 100*2**i for i in range(2) ]

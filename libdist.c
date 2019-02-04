@@ -1,6 +1,42 @@
 #include <stdlib.h>
 #include <math.h>
 
+void csolve_poisson(const double* rho,double* phi,const size_t N){
+	const size_t N2=N*N,T=56;
+	for(size_t i=0;i<N2;++i)
+		phi[i]=rho[i]*0.25;
+		
+	for(size_t t=0;t<T;++t)
+		for(size_t i=0;i<N;++i)
+			for(size_t j=0;j<N;++j){
+				double left,right,top,down;
+				
+				if(i)
+					top=phi[(i-1)*N+j];
+				else
+					top=0;
+				
+				if(j)
+					left=phi[i*N+j-1];
+				else 
+					left=0;
+				
+				if(i<(N-1))
+					down=phi[(i+1)*N+j];
+				else
+					down=0;
+				
+				if(j<(N-1))
+					right=phi[i*N+j+1];
+				else
+					right=0;
+			
+				phi[i*N+j] = 0.25*(
+					rho[i*N+j]
+					+ left+right+top+down);
+			}
+}
+
 double cdist_MA(const double* A,const double* B,const size_t N){
 	const size_t N2=N*N,T=56,Npad=N+2;
 	double nA=0,nB=0;
