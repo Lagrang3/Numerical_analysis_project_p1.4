@@ -6,6 +6,10 @@ def plot_k(kthis):
 	f=open("data/eff.txt","r")
 
 	plt.figure()
+	plt.yscale('log')
+	#plt.xscale('log')
+	
+	
 	x = dict()
 	y= dict()
 	
@@ -35,6 +39,7 @@ def plot_k(kthis):
 	plt.xlabel("N (train images)")
 	plt.ylabel("% of error")
 	plt.title(f"Efficiency for {kthis}-Nearest Neighbors")
+	plt.ylim(1,100)
 	plt.savefig(f"plot_{kthis}.png")
 	f.close()
 
