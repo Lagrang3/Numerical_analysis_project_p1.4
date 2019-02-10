@@ -38,6 +38,8 @@ def classify(k,T):
 	cla = [ max(dig,key=dig.count) for dig in digits ]
 	return cla
 
+
+
 def error_classification(k,T):
 	'''
 	returns the fraction of errors
@@ -51,7 +53,7 @@ if __name__ == "__main__":
 	
 	dist_name = sys.argv[1]
 
-	#start=time.perf_counter()
+	start=time.perf_counter()
 
 	if dist_name == "L2":
 		x_train=x_train.reshape((len(x_train),28*28))
@@ -92,25 +94,22 @@ if __name__ == "__main__":
 		
 		metric=skn.dist_metrics.EuclideanDistance()
 	
-	if dist_name == "MA_test":
-		x_train=x_train.reshape((len(x_train),28*28))
-		x_test=x_test.reshape((len(x_test),28*28))
-		
-		metric=skn.dist_metrics.PyFuncDistance(dist_MA_sklearn)
-	
 	if dist_name == "MA":
 		
 		def repackage(data):
-			for i in range(len(data)):
-				data[i]=data[i]*(1.0/data[i].sum())
-				data[i]=solve_poisson(data[i])
+			'''
+			Use gradient of phi data.
+			'''
+			grad_phi = []
+			for m in data:
+				phi = np.zeros(m.shape)
+				solve_poisson(m,phi)
+				
+				grad_phi = grad_phi + np.gradient(phi)
 			
-			scalar=data.reshape((len(data),28*28))
-			gradx=np.diff(data,axis=1)
-			grady=np.diff(data,axis=2)
-			gradx=gradx.reshape((len(data),28*27))
-			grady=grady.reshape((len(data),28*27))
-			return np.concatenate((gradx,grady,scalar),axis=1)
+			grad_phi = np.array(grad_phi).reshape((len(data),-1))
+			
+			return grad_phi
 		
 		x_train = repackage(x_train)
 		x_test = repackage(x_test)
@@ -124,15 +123,15 @@ if __name__ == "__main__":
 			x_train[:N],
 			metric=metric)
 		
-		#end=time.perf_counter()
-		#print("precal:","%.2f sec" % (end-start))
+		end=time.perf_counter()
+#		print("precal:","%.2f sec" % (end-start))
 		
 		for k in [1,3,5]:
 			start=time.perf_counter()
 			err=error_classification(k,10000)
 			end=time.perf_counter()
 			print(dist_name,N,k,err)
-			#print("%.2f sec" % (end-start))
-			#print("k: ",k,
-			#	"error:", "%.2f %%" % (err*100),
-			#	"time:", "%.2f sec" % (end-start) )
+#			print("%.2f sec" % (end-start))
+#			print("k: ",k,"error:",
+#				"%.2f %%" % (err*100),
+#				"time:", "%.2f sec" % (end-start) )

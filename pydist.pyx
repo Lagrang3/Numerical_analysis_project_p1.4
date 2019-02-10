@@ -1,6 +1,9 @@
 cdef extern from "libdist.c":
 	double cdist_MA(const double*,const double*,const size_t)
 
+cdef extern from "libdist.c":
+	void csolve_poisson(const double*,double*,const size_t)
+
 import numpy as np
 cimport numpy as np
 
@@ -28,25 +31,31 @@ def dist_H(a,b):
 	return pow( fpart.dot(fpart) + dx.dot(dx) + dy.dot(dy)  ,0.5)
 	
 # Assignment 7.
-def dist_MA(
-	np.ndarray[np.double_t,ndim=2] a,
-	np.ndarray[np.double_t,ndim=2] b):
+def dist_MA(a,b):
+	fa=a*(1.0/abs(a).sum((0,1)))
+	fb=b*(1.0/abs(b).sum((0,1)))
+	sf = (fa+fb).flatten()
+	phi = np.zeros(b.shape).astype(np.double)
+	solve_poisson(fa-fb,phi)
+	g = np.gradient(phi)
+	dx=g[0].flatten()
+	dy=g[1].flatten()
 	
-	return cdist_MA(<double*> a.data, <double*> b.data, len(a))
+	dx=np.square(dx)
+	dy=np.square(dy)
+	return dx.sum() + dy.sum() # it works better this way
+	#return sf.dot(dx) + sf.dot(dy)
+	
+#def dist_MA(
+#	np.ndarray[np.double_t,ndim=2] a,
+#	np.ndarray[np.double_t,ndim=2] b):
+#	
+#	return cdist_MA(<double*> a.data, <double*> b.data, len(a))
 
-def dist_MA_sklearn(
-	np.ndarray[np.double_t,ndim=1] a,
-	np.ndarray[np.double_t,ndim=1] b):
-	
-	return cdist_MA(<double*> a.data, <double*> b.data, 28)
-	
-	
 def solve_poisson(
-	np.ndarray[np.double_t,ndim=2] rho):
+	np.ndarray[np.double_t,ndim=2] rho,
+	np.ndarray[np.double_t,ndim=2] phi):
 	'''
 	solver of the Poisson equation
 	'''
-	cdef: np.ndarray[np.double_t,ndim=2] 
-		phi=np.zeros(rho.shape)
 	csolve_poisson(<double*> rho.data,<double*> phi.data,28)
-	return phi

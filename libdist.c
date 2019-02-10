@@ -2,39 +2,34 @@
 #include <math.h>
 
 void csolve_poisson(const double* rho,double* phi,const size_t N){
-	const size_t N2=N*N,T=56;
-	for(size_t i=0;i<N2;++i)
-		phi[i]=rho[i]*0.25;
-		
+	const size_t Np2=N+2,T=56;
+	double *buff = (double*)malloc(Np2*Np2*sizeof(double));
+	
+	// boundaries to zero
+	for(size_t i=0;i<Np2;++i)
+		buff[i*Np2+(0)]=buff[i*Np2+(N+1)]=buff[(0)*Np2+i]=buff[(N+1)*Np2+i]=0;
+	
+	// estimate for starting values
+	for(size_t i=1;i<=N;++i)
+		for(size_t j=1;j<=N;++j)
+			buff[ i*Np2 +j ] = 0.25*rho[(i-1)*N+(j-1)] ;
+	
+	// iterate to solution
 	for(size_t t=0;t<T;++t)
-		for(size_t i=0;i<N;++i)
-			for(size_t j=0;j<N;++j){
-				double left,right,top,down;
-				
-				if(i)
-					top=phi[(i-1)*N+j];
-				else
-					top=0;
-				
-				if(j)
-					left=phi[i*N+j-1];
-				else 
-					left=0;
-				
-				if(i<(N-1))
-					down=phi[(i+1)*N+j];
-				else
-					down=0;
-				
-				if(j<(N-1))
-					right=phi[i*N+j+1];
-				else
-					right=0;
-			
-				phi[i*N+j] = 0.25*(
-					rho[i*N+j]
-					+ left+right+top+down);
+		for(size_t i=1;i<=N;++i)
+			for(size_t j=1;j<=N;++j){
+				buff[i*Np2+j] = 0.25*(
+					rho[(i-1)*N+(j-1)]
+					+ buff[(i-1)*Np2+j] + buff[(i+1)*Np2+j] 
+					+ buff[i*Np2+(j-1)] + buff[i*Np2+(j+1)]);
 			}
+	
+	// copy data to output buffer
+	for(size_t i=1;i<=N;++i)
+		for(size_t j=1;j<=N;++j)
+			phi[(i-1)*N+(j-1)] = buff[ i*Np2 +j  ];
+	
+	free(buff);
 }
 
 double cdist_MA(const double* A,const double* B,const size_t N){

@@ -48,15 +48,15 @@ See file `init.py`
 
 ### Assignment 5.
 
-Distance table error for three different distance functions.
+Distance table error for five different distance functions.
 <img src="./all_dist_err.png" alt="Drawing" style="width: 800px;"/>
 
 ```
-[[ 0.58      0.17      0.17    ]
- [ 0.52      0.145     0.135   ]
- [ 0.4425    0.15      0.135   ]
- [ 0.4       0.145     0.12875 ]
- [ 0.369375  0.1025    0.09375 ]]
+[[0.58     0.17     0.17     0.24     0.13    ]
+ [0.52     0.145    0.135    0.19     0.105   ]
+ [0.4425   0.15     0.135    0.155    0.1025  ]
+ [0.4      0.145    0.12875  0.14625  0.10125 ]
+ [0.369375 0.1025   0.09375  0.1175   0.075   ]]
 ```
 
 ### Assignment 6.
