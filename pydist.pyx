@@ -46,11 +46,23 @@ def dist_MA(a,b):
 	return dx.sum() + dy.sum() # it works better this way
 	#return sf.dot(dx) + sf.dot(dy)
 	
-#def dist_MA(
-#	np.ndarray[np.double_t,ndim=2] a,
-#	np.ndarray[np.double_t,ndim=2] b):
-#	
-#	return cdist_MA(<double*> a.data, <double*> b.data, len(a))
+def dist_MA_sklearn(a,b):
+	fa=a*(1.0/abs(a).sum())
+	fb=b*(1.0/abs(b).sum())
+	sf = (fa+fb).flatten()
+	df=(fa-fb).reshape((28,28))
+	phi = np.zeros(df.shape).astype(np.double)
+	solve_poisson(df,phi)
+	g = np.gradient(phi)
+	dx=g[0].flatten()
+	dy=g[1].flatten()
+	
+	dx=np.square(dx)
+	dy=np.square(dy)
+	return dx.sum() + dy.sum() # it works better this way
+	#return sf.dot(dx) + sf.dot(dy)
+	
+	return cdist_MA(<double*> a.data, <double*> b.data, len(a))
 
 def solve_poisson(
 	np.ndarray[np.double_t,ndim=2] rho,

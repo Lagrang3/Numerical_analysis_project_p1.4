@@ -93,7 +93,13 @@ if __name__ == "__main__":
 		x_test = repackage(x_test)
 		
 		metric=skn.dist_metrics.EuclideanDistance()
-	
+
+	if dist_name == "MA_test":
+		x_train=x_train.reshape((len(x_train),28*28))
+		x_test=x_test.reshape((len(x_test),28*28))
+		metric=skn.dist_metrics.PyFuncDistance(dist_MA_sklearn)
+		
+
 	if dist_name == "MA":
 		
 		def repackage(data):
@@ -102,8 +108,9 @@ if __name__ == "__main__":
 			'''
 			grad_phi = []
 			for m in data:
-				phi = np.zeros(m.shape)
-				solve_poisson(m,phi)
+				fm=m*(1.0/abs(m).sum((0,1)))
+				phi = np.zeros(fm.shape)
+				solve_poisson(fm,phi)
 				
 				grad_phi = grad_phi + np.gradient(phi)
 			
