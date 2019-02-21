@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+# Used for plotting the results on data/eff.txt
+
 import matplotlib.pyplot as plt
 
 def plot_k(kthis):

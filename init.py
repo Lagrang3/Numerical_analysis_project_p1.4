@@ -8,7 +8,7 @@ import itertools
 from methods import *
 import time
 
-arc=pylab.load('mnist.npz')
+arc=pylab.load('data/mnist.npz')
 x_train=arc['arr_0'].astype(np.double)
 y_train=arc['arr_1']
 x_test=arc['arr_2'].astype(np.double)

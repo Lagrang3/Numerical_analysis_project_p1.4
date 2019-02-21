@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+# Unittests and benchmarks
+
 import sys
 import numpy as np
 import unittest

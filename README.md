@@ -6,7 +6,30 @@ author: Myself
 ## Instructions
 
 Do `make` to compile the shared libraries,
-and `make check` to run test.
+and `make check` to run tests.
+The file `data/benchmarks.txt` summarizes the benchmarks performed right after the tests.
+The latter can also be called with the execution of the script `test.py`.
+
+## Contents of the repository
+
+#### Source files for shared libraries written in `C`
+- `libdist.c` defines the `C` function `csolve_poisson` to solve poisson equation.
+- `pydist.pyx` is used to interface `csolve_poisson` into python code and defines all distance functions.
+- `setup.py` contains the necessary instructions to compile the Cython library.
+
+#### 
+- `init.py`  
+- `methods.py`  
+- `classify.py`
+
+
+#### Testing and visualization
+- `show_img.py` used to visualize the images from the mnist database.
+- `plot.py` used to visualize the results of the computation of errors
+for the different classification methods.
+- `test.py` contains the unittests and benchmarks.
+
+## Solution to the assignments
 
 ### Assignment 1.
 See file `methods.py`. 
@@ -35,13 +58,13 @@ dist_matrix for 100 images of size (28, 28) using dist_2: 0.14563 seconds
 ### Assignment 3.
 
 Distance table for the first *N=100* images using the function `dist_oo`.
-<img src="./dist_oo.png" alt="Drawing" style="width: 800px;"/>
+<img src="./images/dist_oo.png" alt="Drawing" style="width: 800px;"/>
 
 Distance table for the first *N=100* images using the function `dist_1`.
-<img src="./dist_1.png" alt="Drawing" style="width: 800px;"/>
+<img src="./images/dist_1.png" alt="Drawing" style="width: 800px;"/>
 
 Distance table for the first *N=100* images using the function `dist_2`.
-<img src="./dist_2.png" alt="Drawing" style="width: 800px;"/>
+<img src="./images/dist_2.png" alt="Drawing" style="width: 800px;"/>
 
 ### Assignment 4.
 See file `init.py`
@@ -49,7 +72,7 @@ See file `init.py`
 ### Assignment 5.
 
 Distance table error for five different distance functions.
-<img src="./all_dist_err.png" alt="Drawing" style="width: 800px;"/>
+<img src="./images/all_dist_err.png" alt="Drawing" style="width: 800px;"/>
 
 ```
 [[0.58     0.17     0.17     0.24     0.13    ]
@@ -78,7 +101,7 @@ The errors of the distance table for *N=100,200,400,800,1600* are
 `[0.24, 0.19, 0.155, 0.14625, 0.1175]` respectively.
 
 Distance table for the first *N=100* images using the function `dist_H`.
-<img src="./dist_H.png" alt="Drawing" style="width: 800px;"/>
+<img src="./images/dist_H.png" alt="Drawing" style="width: 800px;"/>
 
 ### Assignment 7.
 
@@ -101,10 +124,10 @@ The errors of the distance table for *N=100,200,400,800,1600* are
 `[0.14, 0.105, 0.1025, 0.0975, 0.075625]` respectively.
 
 Distance table for the first *N=100* images using the function `dist_MA`.
-<img src="./dist_MA.png" alt="Drawing" style="width: 800px;"/>
+<img src="./images/dist_MA.png" alt="Drawing" style="width: 800px;"/>
 
 ### Assignment 8.
 
-<img src="./plot_1.png" alt="Drawing" style="width: 800px;"/>
-<img src="./plot_3.png" alt="Drawing" style="width: 800px;"/>
-<img src="./plot_5.png" alt="Drawing" style="width: 800px;"/>
+<img src="./images/plot_1.png" alt="Drawing" style="width: 800px;"/>
+<img src="./images/plot_3.png" alt="Drawing" style="width: 800px;"/>
+<img src="./images/plot_5.png" alt="Drawing" style="width: 800px;"/>

@@ -1,5 +1,9 @@
-cdef extern from "libdist.c":
-	double cdist_MA(const double*,const double*,const size_t)
+# Cython shared library to import the poisson solver 
+# from C to Python.
+#
+# Also written by myself during the weekend.
+#
+# License is Copycenter
 
 cdef extern from "libdist.c":
 	void csolve_poisson(const double*,double*,const size_t)
@@ -62,7 +66,7 @@ def dist_MA_sklearn(a,b):
 	return dx.sum() + dy.sum() # it works better this way
 	#return sf.dot(dx) + sf.dot(dy)
 	
-	return cdist_MA(<double*> a.data, <double*> b.data, len(a))
+#	return cdist_MA(<double*> a.data, <double*> b.data, len(a))
 
 def solve_poisson(
 	np.ndarray[np.double_t,ndim=2] rho,
