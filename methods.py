@@ -1,11 +1,14 @@
 #!/usr/bin/env python
 
-#import ctypes
 import time
 import numpy as np
 from pydist import *
 
 def args_to_str(*args,**kw):
+	'''
+	Auxiliary function to be used by a decorator.
+	It returns a string with the input arguments separated by commas.
+	'''
 	l = []
 	if args:
 		l.append( ", ".join( str(i) for i in args)  )
@@ -14,6 +17,9 @@ def args_to_str(*args,**kw):
 	return ", ".join(l)
 
 def time_this(f):
+	'''
+	Decorator to measure time of execution.
+	'''
 	def tf(*args,**kw):
 		start=time.perf_counter()
 		r=f(*args,**kw)
@@ -23,11 +29,10 @@ def time_this(f):
 	return tf
 
 
-# Assignment 2	
 def dist_matrix(N,dist_f,x_data):
 	'''
 	This function computes the distance matrix 
-	of the first N images in the training list using
+	of the first N images in the training list x_data using
 	the provided distance function dist_f.
 	'''
 	D =np.ndarray((N,N))
@@ -38,28 +43,49 @@ def dist_matrix(N,dist_f,x_data):
 	return D
 
 
-
-def dist_error(D,y_data):
+def dist_error(D_matrix,y_data):
 	'''
 	This functions computes the error of using distance
-	function which produces the distance matrix D.
+	function which produces the distance matrix D_matrix.
 	'''
 	oo=1e+100
 	
-	N = len(D)
+	N = len(D_matrix)
 	for i in range(N):
-		D[i,i]=oo
+		D_matrix[i,i]=oo
 		
 	err=0.
-	for i,row in enumerate(D):
+	for i,row in enumerate(D_matrix):
 		j=row.argmin()
 		if y_data[i] != y_data[j]:
 			err += 1.
 	
 	for i in range(N):
-		D[i,i]=0.
+		D_matrix[i,i]=0.
 		
 	return err/N
+
+
+def compute_error_dist_matrix(ldist,x_data,y_data):
+	'''
+	INPUT
+		ldist: a list of distance functions
+		x_data: input database
+		y_data: input database
+	OUTPUT
+		a list of values of the error of the distance matrix 
+	for N = 100,200,400,800,1600.
+	'''
+	x=[ 100*2**i for i in range(5) ]
+	ly = []
+	for dist_f in ldist:
+		start=time.perf_counter()
+		y = [ dist_error(dist_matrix(n,dist_f,x_data),y_data) for n in x ]
+		end=time.perf_counter()
+		ly.append(y)
+		print(dist_f.__name__,y,"( %.2f  seconds)" % (end-start))
+	
+	return x,ly
 
 
 if __name__ == '__main__':

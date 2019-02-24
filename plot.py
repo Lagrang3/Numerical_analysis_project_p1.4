@@ -1,10 +1,22 @@
 #!/usr/bin/env python
 
-# Used for plotting the results on data/eff.txt
+# Plotting methods.
 
 import matplotlib.pyplot as plt
 
+def plot_image(data,filename):
+	plt.figure()
+	plt.imshow(data,cmap='gray_r')
+	plt.savefig(filename)
+
+
 def plot_k(kthis):
+	'''
+	plots the contents of the file data/eff.txt
+	visualize the errors of classification for 
+	the different distance functions.
+	'''
+	
 	f=open("data/eff.txt","r")
 
 	plt.figure()
@@ -45,8 +57,53 @@ def plot_k(kthis):
 	plt.savefig(f"plot_{kthis}.png")
 	f.close()
 
+
+def plot_dist_matrix(ldist,x_data):
+	'''
+	input: a list of distance functions.
+	output: multiple plots of distance matrices for N=100.
+	'''
+	for dist_f in ldist:
+		plt.figure()
+		dm = dist_matrix(100,dist_f,x_data)
+		plt.imshow(dm,cmap='gray_r')
+		plt.savefig(dist_f.__name__+".png")
+
+
+def plot_error_dist_matrix(ldist,x,ly):
+	'''
+	input: 
+		- list of distance functions, 
+		- list of sizes
+		- list of errors (for each function)
+	output: a plot 'all_dist_err.png' with comparison of
+	the distance matrices for N=100.
+	'''
+	plt.figure()
+	y=[]
+	for d,yd in zip(ldist,ly):
+		plt.plot(
+			x,
+			yd,
+			label=d.__name__)
+		y = y + yd
+	plt.legend()
+	err_table = np.array( y ).reshape((len(ldist),len(x)))
+	print(err_table.T)
+	plt.savefig("all_dist_err.png")
+
 if __name__ == "__main__":
+	
+	
 	
 	plot_k(1)
 	plot_k(3)
 	plot_k(5)
+	
+	
+	plot_dist_matrix(
+		[dist_oo,dist_1,dist_2,dist_H,dist_MA])
+	x,ly=compute_error_dist_matrix(
+		[dist_oo,dist_1,dist_2,dist_H,dist_MA])
+	plot_error_dist_matrix(
+		[dist_oo,dist_1,dist_2,dist_H,dist_MA],x,ly)

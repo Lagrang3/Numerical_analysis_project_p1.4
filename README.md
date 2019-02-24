@@ -10,6 +10,20 @@ and `make check` to run tests.
 The file `data/benchmarks.txt` summarizes the benchmarks performed right after the tests.
 The latter can also be called with the execution of the script `test.py`.
 
+In the file `classify.py` there is a class named `Oracle` that classifies 28x28 images.
+For details see the code, which is well commented.
+An example of the use of the `Oracle` in python shell could be:
+
+```
+>>> from classify import *
+>>> n=1000
+>>> oo = Oracle("L2",x_train[:n],y_train[:n])
+>>> oo.classify(1,x_test[:10])
+[7, 2, 1, 0, 4, 1, 9, 9, 4, 9]
+>>> y_test[:10].tolist()
+[7, 2, 1, 0, 4, 1, 4, 9, 5, 9]
+```
+
 ## Contents of the repository
 
 #### Source files for shared libraries written in `C`
@@ -17,17 +31,22 @@ The latter can also be called with the execution of the script `test.py`.
 - `pydist.pyx` is used to interface `csolve_poisson` into python code and defines all distance functions.
 - `setup.py` contains the necessary instructions to compile the Cython library.
 
-#### 
-- `init.py`  
-- `methods.py`  
-- `classify.py`
+#### Core files 
+- `methods.py` general purpose methods. 
+- `classify.py` definition and initialization of the classificator.
 
 
 #### Testing and visualization
 - `show_img.py` used to visualize the images from the mnist database.
-- `plot.py` used to visualize the results of the computation of errors
-for the different classification methods.
+- `plot.py` used to visualize the results.
 - `test.py` contains the unittests and benchmarks.
+
+## To do
+
+- More unittest.
+- More benchmarks.
+- Plot phi after solving poisson.
+- Show which images failed classification.
 
 ## Solution to the assignments
 
@@ -88,13 +107,13 @@ Here below the performance of
 the distance function `dist_H`, running on an array size of *NxN*
 with *N=1000*. The complexity is *O(N^2)*.
 ```
-dist_H for images of size (1000, 1000): 0.06248 seconds
+dist_H for images of size (1000, 1000): 0.03278 seconds
 ```
 Here below the performance of the
 computation of matrix distances for *N* images of size 
 *SxS* with *S=28* and *N=100*. The complexity is *O(N^2 S^2)*.
 ```
-dist_matrix for 100 images of size (28, 28) using dist_H: 0.46454 seconds
+dist_matrix for 100 images of size (28, 28) using dist_H: 0.78396 seconds
 ```
 
 The errors of the distance table for *N=100,200,400,800,1600* are
@@ -111,13 +130,13 @@ with *N=1000*. The complexity is *O(N^2 T)*, where *T* is the number
 of steps used to solve the Poisson Equation using Jacobi's method.
 We fix *T=100*.
 ```
-dist_MA for images of size (1000, 1000): 1.98423 seconds
+dist_MA for images of size (1000, 1000): 0.07709 seconds
 ```
 Here below the performance of the
 computation of matrix distances for *N* images of size 
 *SxS* with *S=28* and *N=100*. The complexity is *O(N^2 T S^2)*.
 ```
-dist_matrix for 100 images of size (28, 28) using dist_MA: 7.75710 seconds
+dist_matrix for 100 images of size (28, 28) using dist_MA: 3.00380 seconds
 ```
 
 The errors of the distance table for *N=100,200,400,800,1600* are

@@ -18,9 +18,4 @@ plot: data/eff.txt
 	./plot.py
 	
 	
-
-
-data/eff.txt: classify.py
-	./classify.py >> data/eff.txt 
-
 .PHONY: clean default check run plot
