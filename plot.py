@@ -2,6 +2,8 @@
 
 # Plotting methods.
 
+from pydist import *
+from classify import *
 import matplotlib.pyplot as plt
 
 def plot_image(data,filename):
@@ -102,8 +104,15 @@ if __name__ == "__main__":
 	
 	
 	plot_dist_matrix(
-		[dist_oo,dist_1,dist_2,dist_H,dist_MA])
+		[dist_oo,dist_1,dist_2,dist_H,dist_MA,dist_L2_blurry],
+		x_train)
+		
 	x,ly=compute_error_dist_matrix(
-		[dist_oo,dist_1,dist_2,dist_H,dist_MA])
+		[dist_oo,dist_1,dist_2,dist_H,dist_MA,dist_L2_blurry],
+		x_train,
+		y_train)
+		
 	plot_error_dist_matrix(
-		[dist_oo,dist_1,dist_2,dist_H,dist_MA],x,ly)
+		[dist_oo,dist_1,dist_2,dist_H,dist_MA,dist_L2_blurry],
+		x,
+		ly)

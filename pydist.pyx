@@ -60,6 +60,18 @@ def dist_MA(a,b):
 	return dx.sum() + dy.sum() # it works better this way
 	#return sf.dot(dx) + sf.dot(dy)
 	
+def dist_L2_blurry(a,b):
+	'''
+	L2 of phi field from Poisson eq. 
+	'''
+	fa=a*(1.0/abs(a).sum((0,1)))
+	fb=b*(1.0/abs(b).sum((0,1)))
+	phi = np.zeros(b.shape).astype(np.double)
+	solve_poisson(fa-fb,phi)
+	phi=phi.flatten();
+	
+	return pow(phi.dot(phi),0.5)
+
 def solve_poisson(
 	np.ndarray[np.double_t,ndim=2] rho,
 	np.ndarray[np.double_t,ndim=2] phi):

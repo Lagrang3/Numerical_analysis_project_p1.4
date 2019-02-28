@@ -3,8 +3,10 @@ dist_1 for images of size (1000, 1000): 0.00589 seconds
 dist_2 for images of size (1000, 1000): 0.00900 seconds
 dist_H for images of size (1000, 1000): 0.04342 seconds
 dist_MA for images of size (1000, 1000): 1.14622 seconds
+dist_L2_blurry for images of size (1000, 1000): 0.03561 seconds
 dist_matrix for 100 images of size (28, 28) using dist_oo: 0.14089 seconds
 dist_matrix for 100 images of size (28, 28) using dist_1: 0.14013 seconds
 dist_matrix for 100 images of size (28, 28) using dist_2: 0.14067 seconds
 dist_matrix for 100 images of size (28, 28) using dist_H: 0.82029 seconds
 dist_matrix for 100 images of size (28, 28) using dist_MA: 4.56327 seconds
+dist_matrix for 100 images of size (28, 28) using dist_L2_blurry: 1.81777 seconds

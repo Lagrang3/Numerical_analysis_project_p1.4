@@ -37,7 +37,6 @@ An example of the use of the `Oracle` in python shell could be:
 
 
 #### Testing and visualization
-- `show_img.py` used to visualize the images from the mnist database.
 - `plot.py` used to visualize the results.
 - `test.py` contains the unittests and benchmarks.
 
@@ -128,7 +127,7 @@ Here below the performance of
 the distance function `dist_MA`, running on an array size of *NxN*
 with *N=1000*. The complexity is *O(N^2 T)*, where *T* is the number
 of steps used to solve the Poisson Equation using Jacobi's method.
-We fix *T=100*.
+We fix *T=56*.
 ```
 dist_MA for images of size (1000, 1000): 0.07709 seconds
 ```
@@ -167,11 +166,38 @@ If two curves in the 28x28 canvas are similar from our point of view,
 it doesn't necessarily means that their L2 distance is small.
 In fact by just translating a little bit one away from the other
 we can make them have non-overlaping points and their distance
-will be as big as it can. However, their blurry version
+will be as big as it can. However, their *blurry* version
 fill the entire canvas and their L2 distance (or H1) might not be as bad.
 With the previously discussed Monge-Ampere distance we are actually 
-testing that thesis: using the H1 distance over the blurry images
+testing that thesis: using the H1 distance over the *blurry* images
 to find similarities. But we have seen that the fail rate
 of H1 is bigger than L2 for the original images,
 so we suspect that maybe by using L2 over *blurry* images
-will overperform H1 and thus Monge-Ampere distance.
+will outperform H1 and thus Monge-Ampere distance.
+
+Here below the performance of
+the distance function `dist_MA`, running on an array size of *NxN*
+with *N=1000*. The complexity---just like for Monge-Ampere---is 
+*O(N^2 T)*, where *T* is the number
+of steps used to solve the Poisson Equation using Jacobi's method.
+We fix *T=56*. However `dist_L2_blurry` is slighty faster than
+`dist_MA` because there is no need to compute the gradient
+of the solution to the Poisson Equation.
+```
+dist_L2_blurry for images of size (1000, 1000): 0.03561 seconds
+```
+Here below the performance of the
+computation of matrix distances for *N* images of size 
+*SxS* with *S=28* and *N=100*. The complexity is *O(N^2 T S^2)*.
+```
+dist_matrix for 100 images of size (28, 28) using dist_L2_blurry: 1.81777 seconds
+```
+
+The errors of the distance table for *N=100,200,400,800,1600* are
+`[0.24, 0.15, 0.14, 0.13125, 0.119375]` respectively.
+Which disproves the previous hypothesis.
+
+Distance table for the first *N=100* images using the 
+function `dist_L2_blurry`.
+<img src="./images/dist_L2_blurry.png" alt="Drawing" style="width: 800px;"/>
+
