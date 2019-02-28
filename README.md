@@ -150,3 +150,28 @@ Distance table for the first *N=100* images using the function `dist_MA`.
 <img src="./images/plot_1.png" alt="Drawing" style="width: 800px;"/>
 <img src="./images/plot_3.png" alt="Drawing" style="width: 800px;"/>
 <img src="./images/plot_5.png" alt="Drawing" style="width: 800px;"/>
+
+### Extra
+
+Observe the result to the Poisson equation (to the right) 
+for an image of the database (to the left):
+<p float="center">
+	<img src="images/orig_image.png" width="200" />
+	<img src="images/phi_image.png" width="200" /> 
+</p>
+
+Intuitively the solution to the Poisson equation
+with an image at the right hand side will yield a new image
+which is a *blurry* version of the original.
+If two curves in the 28x28 canvas are similar from our point of view,
+it doesn't necessarily means that their L2 distance is small.
+In fact by just translating a little bit one away from the other
+we can make them have non-overlaping points and their distance
+will be as big as it can. However, their blurry version
+fill the entire canvas and their L2 distance (or H1) might not be as bad.
+With the previously discussed Monge-Ampere distance we are actually 
+testing that thesis: using the H1 distance over the blurry images
+to find similarities. But we have seen that the fail rate
+of H1 is bigger than L2 for the original images,
+so we suspect that maybe by using L2 over *blurry* images
+will overperform H1 and thus Monge-Ampere distance.
