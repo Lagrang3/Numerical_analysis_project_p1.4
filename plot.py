@@ -62,15 +62,15 @@ def plot_k(kthis):
 	f.close()
 
 
-def plot_dist_matrix(ldist,x_data):
+def plot_dist_matrix(ldist,dm):
 	'''
-	input: a list of distance functions.
+	input: a list of distance functions and their distance matrix
 	output: multiple plots of distance matrices for N=100.
 	'''
-	for dist_f in ldist:
+	for i,dist_f in enumerate(ldist):
 		plt.figure()
-		dm = dist_matrix(100,dist_f,x_data)
-		plt.imshow(dm,cmap='gray_r')
+#		dm = dist_matrix(100,dist_f,x_data)
+		plt.imshow(dm[i],cmap='gray_r')
 		plt.savefig(dist_f.__name__+".png")
 
 
@@ -98,16 +98,18 @@ def plot_error_dist_matrix(ldist,x,ly):
 
 if __name__ == "__main__":
 	
-	pass	
 	
-#	plot_k(1)
-#	plot_k(3)
-#	plot_k(5)
-#	
-#	
-#	plot_dist_matrix(
-#		[dist_oo,dist_1,dist_2,dist_H,dist_MA])
-#	x,ly=compute_error_dist_matrix(
-#		[dist_oo,dist_1,dist_2,dist_H,dist_MA])
-#	plot_error_dist_matrix(
-#		[dist_oo,dist_1,dist_2,dist_H,dist_MA],x,ly)
+	plot_k(1)
+	plot_k(3)
+	plot_k(5)
+	
+	from classify import *
+	
+	dlist=[dist_oo,dist_1,dist_2,dist_H,dist_MA]
+	dmatrix = [ dist_matrix(100,df,x_train) for df in dlist  ]
+	
+	plot_dist_matrix(dlist,dmatrix)
+	
+	x,ly=compute_error_dist_matrix(dlist,x_train,y_train)
+	
+	plot_error_dist_matrix(dlist,x,ly)

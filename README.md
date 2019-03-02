@@ -27,6 +27,8 @@ An example of the use of the `Oracle` in python shell could be:
 >>>
 ```
 
+The last for loop will produce the following image files.
+
 <p float="left">
 <img src="images/img0.png" width="100" />
 <img src="images/img1.png" width="100" />
@@ -42,8 +44,6 @@ An example of the use of the `Oracle` in python shell could be:
 <img src="images/img8.png" width="100" />
 <img src="images/img9.png" width="100" />
 </p>
-
-
 
 ## Contents of the repository
 
@@ -70,10 +70,13 @@ An example of the use of the `Oracle` in python shell could be:
 ## Solution to the assignments
 
 ### Assignment 1.
-See file `methods.py`. 
 Here below the performance of
 the distance functions implemented, running on an array size of *NxN*
 with *N=1000*. The complexity is *O(N^2)*.
+
+- `dist_oo` corresponds to an *L-infinity* norm induced distance
+- `dist_1` corresponds to an *L-1* norm induced distance
+- `dist_2` corresponds to an *L-2* norm induced distance
 
 ```
 dist_oo for images of size (1000, 1000): 0.00948 seconds
@@ -82,7 +85,6 @@ dist_2 for images of size (1000, 1000): 0.00899 seconds
 ```
 
 ### Assignment 2.
-See file `init.py`. 
 Here below the performance of the
 computation of matrix distances for *N* images of size 
 *SxS* with *S=28* and *N=100*. The complexity is *O(N^2 S^2)*.
@@ -104,9 +106,6 @@ Distance table for the first *N=100* images using the function `dist_1`.
 Distance table for the first *N=100* images using the function `dist_2`.
 <img src="./images/dist_2.png" alt="Drawing" style="width: 800px;"/>
 
-### Assignment 4.
-See file `init.py`
-
 ### Assignment 5.
 
 Distance table error for five different distance functions.
@@ -122,8 +121,9 @@ Distance table error for five different distance functions.
 
 ### Assignment 6.
 
-Here below the performance of
-the distance function `dist_H`, running on an array size of *NxN*
+The distance function `dist_H` corresponds to the implementation
+of the *H1* distance.
+Here below the performance of `dist_H`, running on an array size of *NxN*
 with *N=1000*. The complexity is *O(N^2)*.
 ```
 dist_H for images of size (1000, 1000): 0.03278 seconds
@@ -143,8 +143,9 @@ Distance table for the first *N=100* images using the function `dist_H`.
 
 ### Assignment 7.
 
-Here below the performance of
-the distance function `dist_MA`, running on an array size of *NxN*
+The function `dist_MA` corresponds to the implementation of a
+linearized version of the *Monge-Ampere* distance.
+Here below the performance of `dist_MA`, running on an array size of *NxN*
 with *N=1000*. The complexity is *O(N^2 T)*, where *T* is the number
 of steps used to solve the Poisson Equation using Jacobi's method.
 We fix *T=100*.
@@ -164,10 +165,6 @@ The errors of the distance table for *N=100,200,400,800,1600* are
 Distance table for the first *N=100* images using the function `dist_MA`.
 <img src="./images/dist_MA.png" alt="Drawing" style="width: 800px;"/>
 
-
-
-### Assignment 8.
-
 The following are the solutions to the Poisson (phi) applied to the
 first 10 images in the test set.
 
@@ -186,6 +183,13 @@ first 10 images in the test set.
 <img src="images/blur8.png" width="100" />
 <img src="images/blur9.png" width="100" />
 </p>
+
+
+
+### Assignment 8.
+
+
+Comparison of the error yield for all distance functions.
 
 <img src="./images/plot_1.png" alt="Drawing" style="width: 800px;"/>
 <img src="./images/plot_3.png" alt="Drawing" style="width: 800px;"/>

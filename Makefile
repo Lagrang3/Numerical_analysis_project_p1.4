@@ -6,9 +6,6 @@ pydist.cpython-37m-x86_64-linux-gnu.so: pydist.pyx libdist.c
 check: pydist.cpython-37m-x86_64-linux-gnu.so
 	./test.py
 
-run: pydist.cpython-37m-x86_64-linux-gnu.so
-	./init.py
-
 clean:
 	rm -fR build *.so pydist.c __pycache__
 

@@ -17,15 +17,14 @@ x_test=arc['arr_2'].astype(np.double)
 y_test=arc['arr_3']
 
 
-def error_classification(k,T):
+def error_classification(cla,rev):
 	'''
 	returns the fraction of errors
-	k nearest neighbors classification
-	of the first T images
+	cla: list the classification results
+	rev: real values
 	'''
-	cla=classify(k,T)
-	uniq = dict( zip( *np.unique(cla==y_test[:T],return_counts=True) ))
-	return uniq[False]/T
+	uniq = dict( zip( *np.unique(cla==rev,return_counts=True) ))
+	return uniq[False]/len(cla)
 
 class Oracle():
 	'''
@@ -133,29 +132,26 @@ class Oracle():
 
 if __name__ == "__main__":
 
-	pass
 
-#	dist_name = sys.argv[1]
-#
-#	start=time.perf_counter()
-#
-#
-#	for p in range(5,10):
-#		N = 100 * 2**p
-#	
-#		tree=skn.BallTree(
-#			x_train[:N],
-#			metric=metric)
-#		
-#		end=time.perf_counter()
-##		print("precal:","%.2f sec" % (end-start))
-#		
-#		for k in [1,3,5]:
-#			start=time.perf_counter()
-#			err=error_classification(k,10000)
-#			end=time.perf_counter()
-#			print(dist_name,N,k,err)
-#			print("%.2f sec" % (end-start))
-#			print("k: ",k,"error:",
-#				"%.2f %%" % (err*100),
-#				"time:", "%.2f sec" % (end-start) )
+	dist_name = sys.argv[1]
+
+
+
+	for p in range(5,10):
+		N = 100 * 2**p
+	
+		oo=Oracle(dist_name,x_train[:N],y_train[:N])
+		
+		for k in [1,3,5]:
+			M = 10000
+			
+			start=time.perf_counter()
+			cla = oo.classify(k,x_test[:M])
+			err=error_classification(cla,y_test[:M])
+			end=time.perf_counter()
+			
+			print(dist_name,N,k,err)
+			print(
+				"\nk: ",k,
+				"\nerror:","%.2f %%" % (err*100),
+				"\ntime:", "%.2f sec" % (end-start) )
