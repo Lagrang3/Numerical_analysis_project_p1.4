@@ -28,16 +28,19 @@ An example of the use of the `Oracle` in python shell could be:
 ```
 
 <p float="left">
-<img src="images/img0.png" width="90" />
-<img src="images/img1.png" width="90" />
-<img src="images/img2.png" width="90" /> 
-<img src="images/img3.png" width="90" />
-<img src="images/img4.png" width="90" />
-<img src="images/img5.png" width="90" />
-<img src="images/img6.png" width="90" />
-<img src="images/img7.png" width="90" />
-<img src="images/img8.png" width="90" />
-<img src="images/img9.png" width="90" />
+<img src="images/img0.png" width="100" />
+<img src="images/img1.png" width="100" />
+<img src="images/img2.png" width="100" /> 
+<img src="images/img3.png" width="100" />
+<img src="images/img4.png" width="100" />
+</p>
+
+<p float="left">
+<img src="images/img5.png" width="100" />
+<img src="images/img6.png" width="100" />
+<img src="images/img7.png" width="100" />
+<img src="images/img8.png" width="100" />
+<img src="images/img9.png" width="100" />
 </p>
 
 
@@ -169,16 +172,19 @@ The following are the solutions to the Poisson (phi) applied to the
 first 10 images in the test set.
 
 <p float="left">
-<img src="images/blur0.png" width="90" />
-<img src="images/blur1.png" width="90" />
-<img src="images/blur2.png" width="90" /> 
-<img src="images/blur3.png" width="90" />
-<img src="images/blur4.png" width="90" />
-<img src="images/blur5.png" width="90" />
-<img src="images/blur6.png" width="90" />
-<img src="images/blur7.png" width="90" />
-<img src="images/blur8.png" width="90" />
-<img src="images/blur9.png" width="90" />
+<img src="images/blur0.png" width="100" />
+<img src="images/blur1.png" width="100" />
+<img src="images/blur2.png" width="100" /> 
+<img src="images/blur3.png" width="100" />
+<img src="images/blur4.png" width="100" />
+</p>
+
+<p float="left">
+<img src="images/blur5.png" width="100" />
+<img src="images/blur6.png" width="100" />
+<img src="images/blur7.png" width="100" />
+<img src="images/blur8.png" width="100" />
+<img src="images/blur9.png" width="100" />
 </p>
 
 <img src="./images/plot_1.png" alt="Drawing" style="width: 800px;"/>
