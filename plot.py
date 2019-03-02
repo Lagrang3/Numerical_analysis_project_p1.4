@@ -5,6 +5,10 @@
 import matplotlib.pyplot as plt
 
 def plot_image(data,filename):
+	'''
+	Plots the image 'data' provided as a matrix,
+	and saves it into a file 'filename'
+	'''
 	plt.figure()
 	plt.imshow(data,cmap='gray_r')
 	plt.savefig(filename)
@@ -94,16 +98,16 @@ def plot_error_dist_matrix(ldist,x,ly):
 
 if __name__ == "__main__":
 	
+	pass	
 	
-	
-	plot_k(1)
-	plot_k(3)
-	plot_k(5)
-	
-	
-	plot_dist_matrix(
-		[dist_oo,dist_1,dist_2,dist_H,dist_MA])
-	x,ly=compute_error_dist_matrix(
-		[dist_oo,dist_1,dist_2,dist_H,dist_MA])
-	plot_error_dist_matrix(
-		[dist_oo,dist_1,dist_2,dist_H,dist_MA],x,ly)
+#	plot_k(1)
+#	plot_k(3)
+#	plot_k(5)
+#	
+#	
+#	plot_dist_matrix(
+#		[dist_oo,dist_1,dist_2,dist_H,dist_MA])
+#	x,ly=compute_error_dist_matrix(
+#		[dist_oo,dist_1,dist_2,dist_H,dist_MA])
+#	plot_error_dist_matrix(
+#		[dist_oo,dist_1,dist_2,dist_H,dist_MA],x,ly)
