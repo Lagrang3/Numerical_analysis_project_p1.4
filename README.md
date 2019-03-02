@@ -22,7 +22,25 @@ An example of the use of the `Oracle` in python shell could be:
 [7, 2, 1, 0, 4, 1, 9, 9, 4, 9]
 >>> y_test[:10].tolist()
 [7, 2, 1, 0, 4, 1, 4, 9, 5, 9]
+>>> for i in range(10):
+...     plot_image(x_test[i],"img"+str(i)+".png")
+>>>
 ```
+
+<p float="left">
+<img src="images/img0.png" width="100" />
+<img src="images/img1.png" width="100" />
+<img src="images/img2.png" width="100" /> 
+<img src="images/img3.png" width="100" />
+<img src="images/img4.png" width="100" />
+<img src="images/img5.png" width="100" />
+<img src="images/img6.png" width="100" />
+<img src="images/img7.png" width="100" />
+<img src="images/img8.png" width="100" />
+<img src="images/img9.png" width="100" />
+</p>
+
+
 
 ## Contents of the repository
 
@@ -37,7 +55,6 @@ An example of the use of the `Oracle` in python shell could be:
 
 
 #### Testing and visualization
-- `show_img.py` used to visualize the images from the mnist database.
 - `plot.py` used to visualize the results.
 - `test.py` contains the unittests and benchmarks.
 
@@ -45,7 +62,6 @@ An example of the use of the `Oracle` in python shell could be:
 
 - More unittest.
 - More benchmarks.
-- Plot phi after solving poisson.
 - Show which images failed classification.
 
 ## Solution to the assignments

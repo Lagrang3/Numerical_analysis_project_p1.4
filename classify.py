@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 import sklearn.neighbors as skn
 
 from methods import *
+from plot import *
+from pydist import *
 
 ### initialize the training database ###
 arc=pylab.load('data/mnist.npz')

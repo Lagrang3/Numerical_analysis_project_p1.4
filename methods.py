@@ -2,7 +2,6 @@
 
 import time
 import numpy as np
-from pydist import *
 
 def args_to_str(*args,**kw):
 	'''
